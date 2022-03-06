@@ -1,0 +1,100 @@
+import { IonGrid, IonRow, IonSegment,IonCol,IonText,IonIcon } from '@ionic/react'
+import React,{useState} from 'react'
+import Image from 'react-bootstrap/Image'
+import {starOutline} from 'ionicons/icons'
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+
+function ProduitImageDisplay({produitimage,produit,user,islog,handlecart,handlecartunique,handlenonlog}) {
+        const [image, setimage] = useState(
+            {
+                image:produitimage[0].image,
+                size:produitimage[0].size,
+                color:produitimage[0].color,
+                quantite:produitimage[0].quantite,
+                id:produitimage[0].id
+
+            }
+        )
+    const handleclick=id=>{
+       let  image=produitimage.find(x => x.id ===id).image;
+       let size=produitimage.find(x => x.id ===id).size;
+       let color=produitimage.find(x => x.id ===id).color;
+       let qte=produitimage.find(x => x.id ===id).quantite;
+       let lid=produitimage.find(x => x.id ===id).id;
+        setimage({...image,image:image,size:size,color:color,quantite:qte,id:lid})
+    }
+  return (
+    <div>
+    {produit.variation?
+    <>
+    <IonGrid>
+     <IonRow>
+     
+    <IonCol size='8' className='container'>
+    <div className='divimgdetail'>
+    <Image className='imgdetail' src={`http://127.0.0.1:8001${image.image}`} />
+    </div>
+    <div className='mt-2'>
+    <IonSegment className='detailsegment'>
+        {produitimage.map(pi=>
+        <button className='btndrop btndetail' onClick={()=>handleclick(pi.id)}>
+        <Image className='imgbtndetail' src={`http://127.0.0.1:8001${pi.image}`} />
+        </button>)}
+    </IonSegment>
+    </div>
+    </IonCol>
+    <IonCol size='4' className='container'>
+        <h3>{produit.nom}</h3>
+             <h3> <IonText className='redstyle'> {produit.prix} </IonText> CFA</h3>
+             <p>{produit.description}</p>
+             <p>taille:<strong> {image.size}</strong> </p>
+             <p>couleur:<strong> {image.color}</strong></p>
+             <p>Quantité disponible:<strong> {image.quantite}</strong></p>
+             {user.id===produit.vendeur.id?<IonIcon icon={starOutline} className='iconvendeur'/>
+             :<p>
+              {islog? 
+           <button className='vendrebtn' onClick={()=>handlecart(image.id)}>
+           <AddShoppingCartIcon/></button>:<button className='vendrebtn' onClick={handlenonlog}>
+           <AddShoppingCartIcon /></button>} 
+             </p>}
+        </IonCol>
+    </IonRow></IonGrid></>:
+    <>
+    <IonGrid>
+   <IonRow>
+  <IonCol size='8' className='container'>
+    <div className='divimgdetail'>
+    <Image className='imgdetail' src={`http://127.0.0.1:8001${image.image}`} />
+    </div>
+    <div className='mt-2'>
+    <IonSegment className='detailsegment'>
+        {produitimage.map(pi=>
+        <button className='btndrop btndetail' onClick={()=>handleclick(pi.id)}>
+        <Image className='imgbtndetail' src={`http://127.0.0.1:8001${pi.image}`} />
+        </button>)}
+    </IonSegment>
+    </div>
+    </IonCol>
+    <IonCol size='4' className='container'>
+     <h3>{produit.nom}</h3>
+ <p>{produit.description}</p>
+  <p>taille:<strong> {produit.taille}</strong> </p>
+   <p>couleur:<strong> {produit.couleur}</strong></p>
+ <p>Quantité disponible:<strong> {produit.qte}</strong></p>
+ <h3> <IonText className='redstyle'> {produit.prix} </IonText> CFA</h3>
+ {user.id===produit.vendeur.id?<IonIcon icon={starOutline} className='iconvendeur'/>
+     :<p>
+  {islog? 
+ <button className='vendrebtn' onClick={handlecartunique}>
+ <AddShoppingCartIcon/></button>:<button className='vendrebtn' onClick={handlenonlog}>
+ <AddShoppingCartIcon /></button>} 
+  </p>}
+  </IonCol>
+    </IonRow>
+    </IonGrid>
+    </>}
+    </div>
+  )
+}
+
+export default ProduitImageDisplay
