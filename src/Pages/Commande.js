@@ -134,10 +134,10 @@ const confirmation=e=>{
     axiosInstance
     .post('produit/commande/',forma)
     .then(res=>{
-        console.log(res.data)
+        //console.log(res.data)
         let idcom=res.data.id
         let formdata=new FormData()
-        formdata.append('phonegaalgui',res.data.phone_gaalguiMoney)
+        formdata.append('phone',dta.phonegaalgui)
         formdata.append('total',res.data.total)
         formdata.append('livraison',res.data.livraison)
         formdata.append('code',dta.code)
@@ -146,7 +146,8 @@ const confirmation=e=>{
            axios
            .post('http://127.0.0.1:8000/api/client/payementgaalguishop/',formdata)
            .then(res=>{
-              
+             // console.log(res.data)
+              setmodal(false)
             history.push(`/recucommande/${idcom}/${nom}`)   
            })
         

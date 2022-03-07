@@ -26,8 +26,53 @@ function RecuCommandeDesk({commande}) {
                  </IonCol>
              </IonRow>
          </IonGrid>
-        
-         <div >
+         {commande.produitcommande.product===null?
+          <div>
+        <h2 className='centerbtn'> <IonIcon icon={checkmarkDoneOutline}/>Commande effectuée</h2>
+          <IonGrid>
+             <IonRow>
+             <IonCol size='5' className='zeromargin'>
+               <p>Date de l achat</p>
+              <h4>{new Date(commande.created_at).toLocaleDateString()}</h4>
+               </IonCol>
+              <IonCol size='5' className='zeromargin'>
+              <p>Numero de la commande</p>
+              <h4>{commande.id}</h4>
+            </IonCol>
+            <IonCol size='5' className='zeromargin' >
+             <p>Produit acheté </p>
+            <h4>{commande.produitcommande.imageproduct.produit.nom}</h4>
+            </IonCol>
+            <IonCol size='5' className='zeromargin'>
+            <p>Prix unitaire</p>
+            <h4>{commande.produitcommande.imageproduct.produit.prix} {commande.produitcommande.imageproduct.produit.devise.devise}</h4>
+            </IonCol> 
+            <IonCol size='5' className='zeromargin'>
+             <p>Quantité </p>
+             <h4>{commande.produitcommande.quantity} </h4>
+             </IonCol>
+             <IonCol size='5' className='zeromargin' >
+             <p>Frais de livraison </p>
+             <h4>{commande.livraison} {commande.produitcommande.imageproduct.produit.devise.devise}</h4>
+             </IonCol> 
+             <IonCol size='5' className='zeromargin' >
+             <p>Montant total de la commande </p>
+             <h4>{commande.total} {commande.produitcommande.imageproduct.produit.devise.devise}</h4>
+             </IonCol> 
+             <IonCol size='5' className='zeromargin'>
+             <p>Nom du client </p>
+             <h4>{commande.nom_client} </h4>
+             </IonCol> 
+              <IonCol size='12' className='centerbtn signature'>
+              <IonItem >
+              Signature
+              </IonItem>
+              </IonCol>  
+            </IonRow>
+            </IonGrid>
+
+          </div>:
+        <div>
          <h2 className='centerbtn'> <IonIcon icon={checkmarkDoneOutline}/>Commande effectuée</h2>
              <IonGrid>
                  <IonRow>
@@ -45,7 +90,7 @@ function RecuCommandeDesk({commande}) {
                       </IonCol>
                      <IonCol size='5' className='zeromargin'>
                      <p>Prix unitaire</p>
-                     <h4>{commande.produitcommande.product.prix} CFA </h4>
+                     <h4>{commande.produitcommande.product.prix} {commande.produitcommande.product.devise.devise} </h4>
                      </IonCol>  
                      <IonCol size='5' className='zeromargin'>
                      <p>Quantité </p>
@@ -53,11 +98,11 @@ function RecuCommandeDesk({commande}) {
                      </IonCol>
                      <IonCol size='5' className='zeromargin' >
                      <p>Frais de livraison </p>
-                     <h4>{commande.livraison} CFA</h4>
+                     <h4>{commande.livraison} {commande.produitcommande.product.devise.devise}</h4>
                      </IonCol> 
                      <IonCol size='5' className='zeromargin' >
                      <p>Montant total de la commande </p>
-                     <h4>{commande.total} CFA</h4>
+                     <h4>{commande.total} {commande.produitcommande.product.devise.devise}</h4>
                      </IonCol> 
                      <IonCol size='5' className='zeromargin'>
                      <p>Nom du client </p>
@@ -70,11 +115,15 @@ function RecuCommandeDesk({commande}) {
                     </IonCol>   
                  </IonRow>
              </IonGrid>
-             
-             
-             </div>
+           </div>}
     </div>
   )
 }
 
 export default RecuCommandeDesk
+/*
+
+                     
+                 </IonRow>
+             </IonGrid>
+             */

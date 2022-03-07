@@ -16,7 +16,7 @@ function RecuCommandeMobile({commande}) {
                  <IonCard>Logo</IonCard>
                  </IonCol>
                  <IonCol size='12' className='coladressmobile' >
-                  <IonItem className='centerbtn'>
+                   <IonItem className='centerbtn'>
                       <IonText> <IonIcon icon={locationOutline}/> Dakar, rue on s en fiche</IonText>
                   </IonItem>
                   <IonItem className='centerbtn'> 
@@ -27,7 +27,51 @@ function RecuCommandeMobile({commande}) {
                  </IonCol>
              </IonRow>
          </IonGrid>
-        
+        {commande.produitcommande.product===null?
+          <div>
+           <h2 className='centerbtn'> <IonIcon icon={checkmarkDoneOutline}/>Commande effectuée</h2>
+           <IonGrid>
+             <IonRow>
+             <IonCol size='5' className='centerbtn'>
+              <p>Date de l achat</p>
+              <h4>{new Date(commande.created_at).toLocaleDateString()}</h4>
+              </IonCol>
+              <IonCol size='5' className='centerbtn'>
+              <p>Numero de la commande</p>
+              <h4>{commande.id}</h4>
+              </IonCol> 
+              <IonCol size='5' className='centerbtn' >
+              <p>Produit acheté </p>
+              <h4>{commande.produitcommande.imageproduct.produit.nom}</h4>
+              </IonCol>
+              <IonCol size='5' className='centerbtn'>
+              <p>Prix unitaire</p>
+               <h4>{commande.produitcommande.imageproduct.produit.prix} {commande.produitcommande.imageproduct.produit.devise.devise}  </h4>
+               </IonCol> 
+               <IonCol size='5' className='centerbtn'>
+                <p>Quantité </p>
+                 <h4>{commande.produitcommande.quantity} </h4>
+                 </IonCol>
+                <IonCol size='5' className='centerbtn' >
+                 <p>Frais de livraison </p>
+                 <h4>{commande.livraison}  {commande.produitcommande.imageproduct.produit.devise.devise}</h4>
+                 </IonCol> 
+                <IonCol size='5' className='centerbtn' >
+                <p>Montant total de la commande </p>
+                <h4>{commande.total} 46{commande.produitcommande.imageproduct.produit.devise.devise}</h4>
+                 </IonCol> 
+                 <IonCol size='5' className='centerbtn'>
+                  <p>Nom du client </p>
+                  <h4>{commande.nom_client} </h4>
+                  </IonCol> 
+                  <IonCol size='12' className='centerbtn signature'>
+                  <IonItem >
+                    Signature
+                  </IonItem>
+                    </IonCol>  
+              </IonRow>
+              </IonGrid> 
+          </div>:
          <div >
          <h2 className='centerbtn'> <IonIcon icon={checkmarkDoneOutline}/>Commande effectuée</h2>
              <IonGrid>
@@ -71,9 +115,19 @@ function RecuCommandeMobile({commande}) {
                     </IonCol>   
                  </IonRow>
              </IonGrid>
-             </div>
+             </div>}
     </div>
   )
 }
 
 export default RecuCommandeMobile
+
+
+/*
+
+                     
+                      
+                      
+                 </IonRow>
+             </IonGrid>
+             */

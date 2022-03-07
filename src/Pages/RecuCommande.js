@@ -15,7 +15,7 @@ function RecuCommande(props) {
       .post('produit/getcommande/',{id:id})
       .then(res=>{
           setcommande(res.data)
-         // console.log(res.data)
+         // console.log(res.data) 
           setload(true)
       })
     },[id])
