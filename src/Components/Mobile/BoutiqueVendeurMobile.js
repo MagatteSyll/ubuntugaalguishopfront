@@ -37,7 +37,7 @@ function BoutiqueVendeurMobile({produit,produitvendu, botique, modal,  seg,
         <p>{botique.nbrefollower} abonné(s)</p>  
         <p>{botique.description}<button className='btndrop' onClick={handleopen}>
           <IonIcon icon={pencilOutline}/></button></p>
-         {user.active?
+         {botique.active?
          <p className='centerbtn' >
           <button   onClick={handleajout} className="w3-btn w3-round-xxlarge w3-blue ">
           Ajouter un produit

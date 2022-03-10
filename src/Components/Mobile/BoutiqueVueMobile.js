@@ -12,7 +12,8 @@ import {Link} from 'react-router-dom'
 
 
 function BoutiqueVueMobile({profil,seg,handleproduitactif,handlevendu,
-  prodactif,produit,prodvendu,produitvendu,islog,handlecart,handleconnexion,handledetail,user,getboutique}) {
+  prodactif,produit,prodvendu,produitvendu,islog,handlecart,handleconnexion,handledetail,
+  user,getboutique,isStaf,handlavertir,handlactivation}) {
   return(
     <div className='mobile'>
     <IonGrid>
@@ -25,8 +26,18 @@ function BoutiqueVueMobile({profil,seg,handleproduitactif,handlevendu,
        <IonCol size='6'>
        {islog?
           <span>
+          {user.isbureaucrate?
+            <span>
+           {profil.avertissement} avertissement(s)<br/>
+            {profil.active?
+           <button className="w3-button  w3-red" onClick={handlavertir} >
+            Avertir le vendeur</button>:
+            <button className="w3-button  w3-red" onClick={handlactivation}>Reactiver la boutique</button>
+             }
+            </span>:
+          <>
         <FoolowBoutiquevu  user_id={user.id} boutique_id={profil.id} getboutique={getboutique}/>
-                </span>:null}
+               </>}</span>:null}
             <br/><br/>
             <p>
       <strong> {profil.user.prenom} {profil.user.nom}</strong>

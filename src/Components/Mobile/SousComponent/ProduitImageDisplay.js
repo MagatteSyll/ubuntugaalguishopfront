@@ -11,7 +11,8 @@ function ProduitImageDisplay({produitimage,produit,user,islog,handlecart,handlec
                 size:produitimage[0].size,
                 color:produitimage[0].color,
                 quantite:produitimage[0].quantite,
-                id:produitimage[0].id
+                id:produitimage[0].id,
+                activa:produitimage[0].active
             } 
         )
     const handleclick=id=>{
@@ -20,7 +21,8 @@ function ProduitImageDisplay({produitimage,produit,user,islog,handlecart,handlec
        let color=produitimage.find(x => x.id ===id).color;
        let qte=produitimage.find(x => x.id ===id).quantite;
        let lid=produitimage.find(x => x.id ===id).id;
-        setimage({...image,image:image,size:size,color:color,quantite:qte,id:lid})
+       let activa =produitimage.find(x => x.id ===id).active;
+        setimage({...image,image:image,size:size,color:color,quantite:qte,id:lid,activa:activa})
     }
   return (
     <div>
@@ -30,7 +32,7 @@ function ProduitImageDisplay({produitimage,produit,user,islog,handlecart,handlec
      <IonRow>
      
     <IonCol size='12' className='container' >
-    <h3>{produit.nom}</h3>
+    <h3>{produit.nom}</h3><br/>
     <p>{produit.description}</p>
     <Image className='imgdetailmobile' src={`http://127.0.0.1:8001${image.image}`} />
    
@@ -50,17 +52,22 @@ function ProduitImageDisplay({produitimage,produit,user,islog,handlecart,handlec
              <h3> <IonText className='redstyle'> {produit.prix} </IonText> CFA</h3>
              {user.id===produit.vendeur.id?<IonIcon icon={starOutline} className='iconvendeur'/>
              :<p>
+             {image.activa?
+             <span>
               {islog? 
+            <span>
+            {user.is_staff?null:
            <button className='vendrebtn' onClick={()=>handlecart(image.id)}>
-           <AddShoppingCartIcon/></button>:<button className='vendrebtn' onClick={handlenonlog}>
+           <AddShoppingCartIcon/></button> }</span>
+           :<button className='vendrebtn' onClick={handlenonlog}>
            <AddShoppingCartIcon /></button>} 
-             </p>}
+            </span>:<span className='redstyle'>Produit inactif</span>} </p>}
         </IonCol>
     </IonRow></IonGrid></>:
     <>
     <IonGrid>
    <IonRow>
-   <h3 >{produit.nom}</h3>
+   <h3 >{produit.nom}</h3><br/>
    <p>{produit.description}</p>
   <IonCol size='12' className='container' >
     <div>
@@ -83,11 +90,16 @@ function ProduitImageDisplay({produitimage,produit,user,islog,handlecart,handlec
  <h3> <IonText className='redstyle'> {produit.prix} </IonText> CFA</h3>
  {user.id===produit.vendeur.id?<IonIcon icon={starOutline} className='iconvendeur'/>
      :<p>
+     {produit.active?
+    <span>
   {islog? 
+  <span>
+  {user.is_staff?null:
  <button className='vendrebtn' onClick={handlecartunique}>
- <AddShoppingCartIcon/></button>:<button className='vendrebtn' onClick={handlenonlog}>
+ <AddShoppingCartIcon/></button>} </span>
+ :<button className='vendrebtn' onClick={handlenonlog}>
  <AddShoppingCartIcon /></button>} 
-  </p>}
+ </span>:<span className='redstyle'>Produit inactif</span>} </p>}
   </IonCol>
     </IonRow>
     </IonGrid>

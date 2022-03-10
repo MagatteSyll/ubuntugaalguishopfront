@@ -17,7 +17,7 @@ function DetailNotificationVente(props) {
       setnotification(res.data)
       setload(true)
     })
-  },[id])
+  },[id]) 
   return (
     <div>
      {load?

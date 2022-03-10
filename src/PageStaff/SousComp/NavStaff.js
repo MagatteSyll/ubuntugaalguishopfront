@@ -1,14 +1,17 @@
-import { IonCard, IonCol, IonGrid, IonIcon, IonRow, IonSegment, IonText,IonSearchbar } from '@ionic/react'
-import React,{useState} from 'react'
+import { IonCard, IonCol, IonGrid, IonIcon, IonRow, IonSegment,
+ IonText,IonSearchbar,IonBadge } from '@ionic/react'
+import React,{useState,Fragment} from 'react'
 import { useHistory } from 'react-router-dom'
-import {personCircleOutline} from 'ionicons/icons'
+import {personCircleOutline,searchOutline,notificationsOutline} from 'ionicons/icons'
 import {NavDropdown} from 'react-bootstrap'
 import axiosInstance from '../../axios';
+import {Link} from  'react-router-dom'
 
 
 
 
-function NavStaff({user}) {
+
+function NavStaff({user,notifications,badgenotify,handlenotify,truncateString}) {
   const history=useHistory()
 
   const deconnexion=()=>{
@@ -34,13 +37,19 @@ function NavStaff({user}) {
         </IonCol>
         <IonCol size='7'>
           <BarSearch/>
-          
         </IonCol>
         <IonCol size='3'>
          <IonSegment>
-         <button className='nostylebtn'> Aide technique</button>
-         </IonSegment>   
+         {user.isbureaucrate?null:
+         <button className='nostylebtn'> Aide technique</button>}
+         </IonSegment> 
+         <button></button>  
         </IonCol>
+        {user.istechnique?
+        <IonCol size='3'>
+         <Notify notifications={notifications} truncateString={truncateString}
+         handlenotify={handlenotify} badgenotify={badgenotify}/>
+        </IonCol>:null}
       </IonRow>
     </IonGrid>
     </div>
@@ -52,22 +61,39 @@ function BarSearch() {
       search:''
     })
        const gosearch=e=>{
-  
-      history.push({
+        if(data.search!=="")
+        {
+          history.push({
           pathname: `/recherchecommande/${data.search}`
       })
-      window.location.reload();
+    }
+    return;
+     
   }
+
   return (
       <div className=' container mb-3'>
-       <IonSearchbar
+    <IonGrid>
+    <IonRow>
+    <IonCol size='9'>
+     <IonSearchbar
     value={data.search}
-    onIonChange={(newvalue)=>setData({search:newvalue})}
-   //onRequestSearch={()=>gosearch(data.search)}
+    onIonChange={e=>setData({search:e.target.value})}
+    inputmode="numeric"
+    type='number'
+    onKeyPress={(e) => e.key === 'Enter' && gosearch()}
    placeholder='Numero de la commande '
-            />    
-      </div>
-  )
+   /> 
+    </IonCol>
+    <IonCol size='1'> 
+    <button className='btndrop' onClick={gosearch}>
+   <IonIcon icon={searchOutline} className='iconsearch'/>
+   </button>  
+    </IonCol>
+    </IonRow>
+    </IonGrid>
+   </div>
+    )
 }
 
 function Me({user,deconnexion}){
@@ -85,4 +111,48 @@ function Me({user,deconnexion}){
   )
 }
 
+function Notify({notifications,truncateString,handlenotify,badgenotify}) {
+  return(
+    <Fragment>
+   <NavDropdown
+    id="nav-dropdown-dark-example"
+    className='dropdown'
+    onClick={handlenotify}
+    title={<IonText className='dropicon'><IonIcon icon={notificationsOutline} className='zoomicon'/>
+  {badgenotify <1?null:
+   <IonBadge color="danger" className='notifybadgestaf'>{badgenotify}</IonBadge>}
+    </IonText>}>
+  <Fragment>
+    {notifications.length>0?
+    <div>
+    {notifications.map(notify=>
+      <NavDropdown.Item>
+      {notify.nature_notification==='probleme technique'?
+      <IonText> <Link to={`/detailprobleme/${notify.id}`} className='link'> 
+     {truncateString(notify.message,30)} </Link></IonText>:null}
+      </NavDropdown.Item>)}
+    </div>:
+    <p>hello</p>}
+  </Fragment>
+  </NavDropdown>
+  </Fragment>
+  );
+}
+
 export default NavStaff
+
+
+/*
+  
+    <div className='dropit'> 
+    {notifications.map(notify=>
+    <NavDropdown.Item key={notify.id}>
+      ?
+     <IonText> <Link to={`/detailprobleme/${notify.id}`} className='link'> 
+     {truncateString(notify.message,30)} </Link></IonText>:null}
+     </NavDropdown.Item>)}
+     </div>
+     :<NavDropdown.Item>Aucune notification technique</NavDropdown.Item>}
+    </Fragment>
+
+    */

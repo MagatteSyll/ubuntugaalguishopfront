@@ -2,8 +2,9 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import axiosInstance from '../axios';
+import axiosInstance from '../../axios';
 import { useHistory } from 'react-router';
+import {IonGrid,IonRow,IonCol,} from '@ionic/react'
 
 export default function Foot() {
   const history=useHistory()
@@ -15,6 +16,9 @@ export default function Foot() {
 		axiosInstance.defaults.headers['Authorization'] = null;
 		history.push('/connexion');
   }
+ const handletechnique=()=>{
+  history.push('/signaldeproblemetechnique')
+ }
   return (
     <footer>
       <Box
@@ -24,27 +28,27 @@ export default function Foot() {
         color="white"
       >
         <Container >
-          <Grid container spacing={5}>
-            <Grid item xs={12} sm={3}>
-              <Box> <Typography  variant="h6" color="#d500f9" gutterBottom>Signalez un probleme technique</Typography></Box>
-            </Grid>
-
-            <Grid item xs={12} sm={3}>
-              <Box >
-              <Typography  variant="h6" color="#d500f9" gutterBottom>De l aide en Ligne</Typography></Box>
-            </Grid> 
-            <Grid item xs={12} sm={3}>
-              <Box >
-              <Typography  variant="h6" color="#d500f9" gutterBottom>Guide</Typography></Box>
-            </Grid> 
-            <Grid item xs={12} sm={3}>
-              <Box> <Typography  variant="h6" color="#d500f9" gutterBottom><button 
-              style={{border:'none',background:'none' ,color:'white'}} onClick={Deconnexion}>Deconnexion</button></Typography></Box>
-            </Grid>
-          </Grid>  
-          <Box textAlign="center" pt={{ xs: 5, sm: 10 }} pb={{ xs: 5, sm: 0 }}>
-           Gaalgui &reg; {new Date().getFullYear()}
+        <IonGrid>
+       <IonRow>
+        <IonCol size='4'>
+         <button className='btnfoot' onClick={handletechnique}> 
+           Signalez un probleme technique
+        </button>
+        </IonCol>
+        <IonCol size='4'>
+        <button className='btnfoot'>Guide</button>
+        </IonCol>
+        <IonCol size='4'>
+        <button className='btnfoot'
+        onClick={Deconnexion}>Deconnexion</button>
+        </IonCol>
+        <IonCol size='12'>
+         <Box textAlign="center" pt={{ xs: 5, sm: 10 }} pb={{ xs: 5, sm: 0 }}>
+           GaalguiShop &reg; {new Date().getFullYear()}
           </Box>
+        </IonCol>
+       </IonRow>
+        </IonGrid> 
         </Container>
       </Box>
     </footer>

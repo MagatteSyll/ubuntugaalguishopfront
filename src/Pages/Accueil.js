@@ -1,7 +1,6 @@
 import React, { Fragment,useState,useEffect } from 'react'
 import AccueilDesk from '../Components/Desk/AccueilDesk'
 import AccueilMobile from '../Components/Mobile/AccueilMobile'
-import StaffAccueil from '../PageStaff/StaffAccueil'
 import axios from 'axios'
 import {IonLoading} from '@ionic/react'
 import axiosInstance from '../axios'
@@ -17,9 +16,6 @@ function Accueil({isstaf,user,islog}) {
     const [catload, setcatload] = useState(false)
     const [occasload, setoccasload] = useState(false)
   
-
-
-
     useEffect(()=>{
        getvendeur()
     },[])
@@ -67,7 +63,6 @@ function Accueil({isstaf,user,islog}) {
     
     return ( 
        <div>
-        {isstaf? <StaffAccueil/>:
         <Fragment>
         {catload &&vendload &&occasload?
        
@@ -83,7 +78,7 @@ function Accueil({isstaf,user,islog}) {
         message={'Chargement...'}
         duration={5000} />}
 
-        </Fragment>}
+        </Fragment>
            
       </div>
 

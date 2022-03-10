@@ -22,7 +22,7 @@ function BoutiqueVendeurDesk({produit,produitvendu, botique, modal,  seg,
  
   return( 
     <div className='desk boutiquevendeur' >
-      {user.active? 
+      {botique.active? 
       <IonButton   onClick={handleajout} className="ion-float-end">
           Ajouter un produit
        </IonButton>:null}

@@ -22,12 +22,10 @@ function Commande(props) {
     const  [total, settotal] = useState();
     const  [adress,setadress]=useState([])
     const  [livraison, setlivraison] = useState();
-    const  [modal, setmodal] = useState(false);
     const  [dta, setdta] = useState({
         nom:'',
         tel:'',
         phonegaalgui:'',
-        code:'',
         id:'',
         adress:'',
         livraison:''
@@ -79,11 +77,27 @@ const handlesubmit=e=>{
     axios
     .post('http://127.0.0.1:8000/api/client/verificationpayement/',formdata)
     .then(res=>{
-        setdta({
-            ...dta,id:res.data.id
-        })
-        setmodal(true)
-       // console.log(res.data)   
+    let forma=new FormData()
+    let id_code=res.data.id
+    forma.append('nom_client',dta.nom)
+    forma.append('phone',dta.tel)
+    forma.append('adress_id',dta.adress)
+    forma.append('livraison',livraison)
+    forma.append('total',total)
+    forma.append('cart_id',id)
+    forma.append('phone_gaalguiMoney',dta.phonegaalgui)
+    axiosInstance
+    .post('produit/commande/',forma)
+    .then(res=>{
+        //console.log(res.data)
+        let idcom=res.data.id
+        history.push(`/confirmationpayement/${idcom}/${id_code}/${nom}`)
+
+    })
+    .catch(()=>{
+       return;
+    })
+     
     })
     .catch(()=>{
         nogoodtel()
@@ -92,12 +106,6 @@ const handlesubmit=e=>{
 }
 }
 
-const handletime=()=>{
-    setmodal(false)
-}
-const handlecode=e=>{
- setdta({...dta,code:e.target.value})
-}
 const handledta=e=>{
     setdta({...dta,[e.target.name]: e.target.value.trim()})
 }
@@ -116,54 +124,7 @@ const handladress=e=>{
         setcalculer(true)
     })
 }
-const confirmation=e=>{
-    e.preventDefault();
-    if(dta.code===""){
-        nocode()
-        return;
-    }
-   else{
-    let forma=new FormData()
-    forma.append('nom_client',dta.nom)
-    forma.append('phone',dta.tel)
-    forma.append('adress_id',dta.adress)
-    forma.append('livraison',livraison)
-    forma.append('total',total)
-    forma.append('cart_id',id)
-    forma.append('phone_gaalguiMoney',dta.phonegaalgui)
-    axiosInstance
-    .post('produit/commande/',forma)
-    .then(res=>{
-        //console.log(res.data)
-        let idcom=res.data.id
-        let formdata=new FormData()
-        formdata.append('phone',dta.phonegaalgui)
-        formdata.append('total',res.data.total)
-        formdata.append('livraison',res.data.livraison)
-        formdata.append('code',dta.code)
-        formdata.append('commission',res.data.commission)
-        formdata.append('id',dta.id)
-           axios
-           .post('http://127.0.0.1:8000/api/client/payementgaalguishop/',formdata)
-           .then(res=>{
-             // console.log(res.data)
-              setmodal(false)
-            history.push(`/recucommande/${idcom}/${nom}`)   
-           })
-        
-      
 
-    })
-    .catch(()=>{
-       // history.push('/monpanier')
-       setmodal(false)
-        nocommande()
-    })
-   
-      
-   }
-
-}
 
   return (
   <div>
@@ -180,48 +141,6 @@ const confirmation=e=>{
           message={'Chargement...'}
           duration={5000}
         />}
- 
-     <IonModal
-    isOpen={modal}>
-  
-			<form  onSubmit={confirmation} className='formmodal'>
-            <IonGrid>
-            <IonRow>
-                <IonCol size='8'>
-                <p ><label ><b>Code de verification  du numero de telephone GaalguiMoney
-				 <IonText className='asterix'>*</IonText> </b></label></p>
-                </IonCol>
-                <IonCol size='8'>
-				<p className='centerbtn'>
-				<input
-					className="w3-input w3-border w3-margin"
-					required
-					style={{MozAppearance:'textfield'}}
-					id="flecheinput"
-					type='number'
-					inputmode="numeric"
-					onChange={handlecode}
-					/>
-					</p>    
-                 </IonCol>
-                 <IonCol size='8'>
-            </IonCol>
-              <IonCol size='10'>
-                  <IonRow>
-                <IonCol size='6'  >
-                <button className="w3-btn w3-round-xlarge w3-black" type="submit">Confirmer</button>
-                </IonCol>
-                <IonCol size='6'>
-             <button className="w3-btn w3-round-xlarge w3-pink" onClick={()=>setmodal(false)} >Annuler</button>
-                </IonCol>
-                </IonRow>
-                </IonCol>
-            </IonRow>
-        </IonGrid>		
-			
-		</form>
-		
-    </IonModal>
   </div>
   );
 }

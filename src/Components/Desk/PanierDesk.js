@@ -31,9 +31,15 @@ function PanierDesk({cartproduit, handleplus, handleminus,handleremove,truncateS
        <p>prix unitaire <strong>{cart.imageproduct.produit.prix}  {cart.imageproduct.produit.devise.devise} </strong></p>
       <p>sous total <IonText className='redstyle'> {cart.subtotal} {cart.imageproduct.produit.devise.devise} 
        </IonText> </p>
-      <p className='mt-3'><Button variant="outline-warning"
-       onClick={()=>handleplus(cart.imageproduct.produit.slug,cart.imageproduct.id)}><AddCircleIcon/></Button>
+      <p className='mt-3'>
+      {cart.imageproduct.active?
+      <span>
+      {cart.imageproduct.quantite>=cart.quantity?
+      <Button variant="outline-warning"
+       onClick={()=>handleplus(cart.imageproduct.produit.slug,cart.imageproduct.id)}><AddCircleIcon/>
+       </Button>:null}
       <Button variant="outline-info" onClick={()=>handleminus(cart.id)} ><RemoveIcon/></Button>
+      </span>:null}
       <Button  variant="outline-danger" edge='end' onClick={()=>handleremove(cart.id)} ><DeleteIcon/></Button>
       </p>
       </IonCol>
@@ -43,8 +49,15 @@ function PanierDesk({cartproduit, handleplus, handleminus,handleremove,truncateS
       <IonCol size='4'>
       {cart.imageproduct.active?
        <p>
+       {cart.imageproduct.quantite>=cart.quantity?
+       <span>
        <Button  variant="dark" edge='start'
-        onClick={()=>handlecommande(cart.id ,cart.imageproduct.produit.nom,cart.imageproduct.produit.slug)}>Commander</Button><br/>
+        onClick={()=>handlecommande(cart.id ,cart.imageproduct.produit.nom,cart.imageproduct.produit.slug)}>
+        Commander</Button><br/>
+        </span>:<span> <IonText >
+         Diminuez la quantite pour pouvoir  commande  ce produit
+        </IonText></span>}
+        <br/><br/>
        <IonText className='redstyle'>{cart.imageproduct.quantite} disponible(s)</IonText></p>:
        <IonText className='redstyle'>Produit inactif!</IonText>}
       </IonCol>
@@ -63,9 +76,14 @@ function PanierDesk({cartproduit, handleplus, handleminus,handleremove,truncateS
        <p>prix unitaire <strong>{cart.product.prix}  {cart.product.devise.devise} </strong></p>
       <p>sous total <IonText className='redstyle'> {cart.subtotal} {cart.product.devise.devise} 
       </IonText> </p>
-      <p className='mt-3'><Button variant="outline-warning" onClick={()=>handleplunique(cart.product.slug)}>
-      <AddCircleIcon/></Button>
+      <p className='mt-3'>
+      {cart.product.active?
+      <span>
+      {cart.product.qte>=cart.quantity?
+      <Button variant="outline-warning" onClick={()=>handleplunique(cart.product.slug)}>
+      <AddCircleIcon/></Button>:null}
       <Button variant="outline-info" onClick={()=>handleminus(cart.id)} ><RemoveIcon/></Button>
+      </span>:null}
       <Button  variant="outline-danger" edge='end' onClick={()=>handleremove(cart.id)} ><DeleteIcon/></Button>
       </p>
    </IonCol>
@@ -75,8 +93,15 @@ function PanierDesk({cartproduit, handleplus, handleminus,handleremove,truncateS
     <IonCol size='4'>
      {cart.product.active?
        <p>
+       {cart.product.qte>=cart.quantity?
+       <span>
        <Button  variant="dark" edge='start' 
        onClick={()=>handlecommande(cart.id ,cart.product.nom,cart.product.slug)}>Commander</Button><br/>
+       </span>:<span>
+       <IonText > 
+       Diminuez la quantite pour pouvoir  commande  ce produit</IonText>
+       </span>}
+        <br/><br/>
        <IonText className='redstyle'>{cart.product.qte} disponible(s)</IonText></p>:
        <IonText className='redstyle'>Produit inactif!</IonText>}
       </IonCol>

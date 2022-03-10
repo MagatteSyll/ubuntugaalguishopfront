@@ -46,8 +46,12 @@ import Modal from 'react-modal'
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 import {IonAlert} from '@ionic/react'
 import NotificationNote from './Pages/NotificationNote'
-
-
+import ConfirmationPayement from './Pages/ConfirmationPayement'
+import AnnulationCommande from './PageStaff/AnnulationCommande'
+import AvertirLeVendeur from './PageStaff/AvertirLeVendeur'
+import ReactivationBoutique from './PageStaff/ReactivationBoutique'
+import SignaleProbleme from './PageStaff/SignaleProbleme'
+import DetailProbleme from './PageStaff/DetailProbleme'
 
 
 Modal.setAppElement('#root')
@@ -167,7 +171,7 @@ const defaultroute=()=>(
  <Route exact path='/category/:slug'  render={(props) =><ProduitSingleCategory {...props} islog={islog} 
      handlebadge={handlebadge} isStaf={isStaf} truncateString={truncateString} /> }/>
  <Route  path='/boutique/:id/:nom'  render={(props) => <BoutiqueVueClient {...props} handlebadge={handlebadge}
-    islog={islog} user={user} truncateString={truncateString}/> }/>
+    islog={islog} user={user} truncateString={truncateString} isStaf={isStaf}/> }/>
 <Route  path='/mescommandes' render={(props) =>(isStaf?<Redirect to='/'/>:<CommandeEnCours />) }/>
  <Route  path='/modification/:slug/:nom' render={(props) => (isStaf?<Redirect to='/'/>:
       <ModificationProduit  {...props} />) }/>
@@ -183,7 +187,10 @@ const defaultroute=()=>(
      user={user} islog={islog}/> }/>
 <Route  path='/parametre' 
 render={(props) =>(isStaf?<Redirect to='/' {...props}/>:<Parametres  {...props}/>) }/>
-<Route  path='/Payement'  render={(props) =>(isStaf?<Redirect to='/' {...props}/>:<Payement   {...props} />)}/>
+<Route  path='/Payement'  render={(props) =>(isStaf?<Redirect to='/' {...props}/>:
+    <Payement   {...props} />)}/>
+<Route  path='/confirmationpayement/:id/:code/:nom'  render={(props) =>(isStaf?<Redirect to='/' {...props}/>:
+    <ConfirmationPayement   {...props} />)}/>
 <Route  path='/ajoutproduit' render={(props) => (isStaf?<Redirect to='/' {...props}/>: <AjoutProduit />)}/>
  <Route  path='/monpanier'  render={(props) => (isStaf?<Redirect to='/' {...props}/>: <Panier {...props}  truncateString={truncateString}
   handlebadge={handlebadge}/>)}/>
@@ -205,7 +212,10 @@ render={(props) =>(isStaf?<Redirect to='/' {...props}/>:<Parametres  {...props}/
     :<DesactivationBoutique {...props} />) }/>
  <Route  path='/nouveauproduit/:id/:slug' render={(props) =>(isStaf?<Redirect to='/' {...props}/>
     :<NotificationFollower {...props} handlebadge={handlebadge} />) }/>
-<Footer/>
+ <Route exact path='/detailprobleme/:id' 
+    render={(props)=>(user.istechnique?<DetailProbleme {...props}/>:null)}
+    />
+<Footer isStaf={isStaf}/>
   </div>
 );
   return(
@@ -221,7 +231,15 @@ render={(props) =>(isStaf?<Redirect to='/' {...props}/>:<Parametres  {...props}/
       render={(props) => (isStaf?<Accueil/>:(islog? <RecuCommande  {...props} />:null)) }/>
      <Route exact path='/recherchecommande/:id' render={(props) =>(isStaf?<RechercheCommande {...props} 
       user={user} />:null) }/>
-    <Route component={defaultroute}/>  
+    <Route exact path='/annulationcommande/:id' render={(props) =>(isStaf?<AnnulationCommande {...props} 
+      user={user} />:null) }/>
+    <Route exact path='/avertirlevendeur/:id/:nom'
+     render={(props)=>(user.isbureaucrate?<AvertirLeVendeur {...props}/>:null)}/>
+    <Route exact path='/reactivationboutique/:id/:nom'
+     render={(props)=>(user.isbureaucrate?<ReactivationBoutique {...props}/>:null)}/> 
+    <Route exact path='/signaldeproblemetechnique'
+     render={(props)=>(isStaf?<SignaleProbleme {...props}/>:null)}/> 
+    <Route component={defaultroute}/> 
     </Switch>
     </BrowserRouter>
     </>:null}

@@ -19,15 +19,9 @@ function RechercheCommande(props) {
  let id =props.match.params.id
  const user=props.user
  const [loaded,setloaded]=useState(false)
- const  [thum, setthum] = useState(true);
- const  [picone, setpicone] = useState(false);
- const [pictwo, setpictwo] = useState(false);
- const  [picthird, setpicthird] = useState(false);
- const  [picfour, setpicfour] = useState(false);
- const  [picfive, setpicfive] = useState(false);
- const  [aler, setaler] = useState(false)
  const  [data, setdata] = useState()
-const [showLoading, setShowLoading] = useState(true);
+ const [showLoading, setShowLoading] = useState(true);
+ const [etat,setetat]=useState("")
 
  const history=useHistory()
   const notify = () => toast.success("Commande annulée !",{
@@ -80,107 +74,65 @@ const handlecommanderetrait=id_commande=>{
 
      })
   }
+const handletat=e=>{
+  setetat(e.target.value)
+}
 
-  
-  const handlethumbnail=()=>{
-  setthum(true)
-  setpicone(false)
-  setpictwo(false)
-  setpicthird(false)
-  setpicfour(false)
-  setpicfive(false)
-}
-const handlepicone=()=>{
-  setthum(false)
-  setpicone(true)
-  setpictwo(false)
-  setpicthird(false)
-  setpicfour(false)
-  setpicfive(false)
-}
-const handlepitwo=()=>{
-  setthum(false)
-  setpicone(false)
-  setpictwo(true)
-  setpicthird(false)
-  setpicfour(false)
-  setpicfive(false)
-}
-const handlepicthird=()=>{
-  setthum(false)
-  setpicone(false)
-  setpictwo(false)
-  setpicthird(true)
-  setpicfour(false)
-  setpicfive(false)
-}
-const handlepifour=()=>{
-  setthum(false)
-  setpicone(false)
-  setpictwo(false)
-  setpicthird(false)
-  setpicfour(true)
-  setpicfive(false)
-}
-const handlepicfive=()=>{
-  setthum(false)
-  setpicone(false)
-  setpictwo(false)
-  setpicthird(false)
-  setpicfour(false)
-  setpicfive(true)
-
-}
-const handleconfirm=id_commande=>{
-  setdata(id_commande)
-  setaler(true)
-}
-const handlennulation=id_commande=>{
+const changement=()=>{
+   if(etat!=="")
+   {
   axiosInstance
-  .post('staff/annulationcommande/',{id:id_commande})
-  .then(res=>{
-    let formdata=new FormData()
-    formdata.append('phone',res.data.phone_gaalguiMoney)
-    formdata.append('montant',res.data.total)
-    formdata.append('commission',res.data.commission)
-    formdata.append('livraison',res.data.livraison)
-    axios
-    .post('http://127.0.0.1:8000/api/client/annulationcommandegaalguishop/',formdata)
-    .then(res=>{
-      
-    })
+  .post('staff/modificationcommande/',{id:id,etat:etat})
+  .then(()=>{
+    handlecomande()
   })
+   }
+  return;
+} 
+
+
+const handlennulation=()=>{
+  history.push(`/annulationcommande/${id}`)
 }
 
 
-  
-
-   return (
+ return (
         <div>
         {loaded?
-      
-      <div className=" container row -3">
+        <div className=" container row -3">
         <IonGrid>
-          <IonRow>
+          {commande.produitcommande.product===null?
+            <div>
+           <IonRow>
            {commande.statut_commande==="produit en attente de livraison "?
             <IonCol size='6' className='mt-3'>
-            <IonItem>
+             <IonItem>
            <Link to='/'><IonIcon icon={arrowUndoOutline} className='zoomicon retour'/></Link> 
-             </IonItem>
+            </IonItem>
             <h3> ****Commande en attente d etre déposée par le vendeur</h3>
             <p> Commande numero <strong> {commande.id}</strong>  </p>
-            <p> produit:<strong> {commande.produitcommande.product.nom}</strong></p>
-            <p> prix: <strong> {commande.produitcommande.product.prix}</strong> CFA</p>
-             <p>taille :<strong>{commande.produitcommande.product.nom}</strong> </p>
-             <p>couleur : <strong> {commande.produitcommande.product.color}</strong></p>
-             <p>  date de la commande : <strong>{new Date(commande.created_at).toLocaleDateString()} </strong></p>
-            <p> status de la commande:<strong> 
-            {commande.statut_commande}</strong></p>
-            <p> adresse de livraison: <strong> 
+            <p> produit <strong> {commande.produitcommande.imageproduct.produit.nom}</strong></p>
+             <p>taille <strong>{commande.produitcommande.imageproduct.size}</strong> </p>
+             <p>couleur  <strong> {commande.produitcommande.imageproduct.color}</strong></p>
+             <p>  date de la commande : <strong>{new Date(commande.created_at).toLocaleDateString()} 
+             </strong></p>
+            <p> prix unitaire du produit <strong> {commande.produitcommande.imageproduct.produit.prix}
+            </strong> {commande.produitcommande.imageproduct.produit.devise.devise}</p>
+             <p>Quantité <strong>{commande.produitcommande.quantity}</strong></p>
+            <p>Montant de la commande <strong>{commande.produitcommande.subtotal}
+            </strong> {commande.produitcommande.imageproduct.produit.devise.devise}</p> 
+            <p> status de la commande <strong> 
+            {commande.statut_commande} </strong></p>
+            <p> adresse de livraison <strong> 
             {commande.adress.region.region},{commande.adress.adress} </strong></p>
-            <p> commission de la plateforme <strong>{commande.commission}</strong></p>
-            <p>Montant a remettre au vendeur <IonText className='redstyle'>{commande.montant_vendeur}</IonText></p>
-             <button className="w3-btn w3-round-xxlarge w3-green" onClick={()=>handlecommandepot(commande.id)}>Confirmer le depot du produit</button>
+            <p> commission de la plateforme <strong>{commande.commission}
+            </strong> {commande.produitcommande.imageproduct.produit.devise.devise}</p>
+            <p>Montant a remettre au vendeur <IonText className='redstyle'>
+             {commande.montant_vendeur} {commande.produitcommande.imageproduct.produit.devise.devise}
+             </IonText></p>
+             {user.isbureaucrate?null:
+             <button className="w3-btn w3-round-xxlarge w3-green"
+              onClick={()=>handlecommandepot(commande.id)}>Confirmer le depot du produit</button>}
             </IonCol>: 
             commande.statut_commande==="produit en cours de livraison "?
             <IonCol size='6'>
@@ -189,17 +141,23 @@ const handlennulation=id_commande=>{
              </IonItem>
             <h3>***Produit en attente d etre livré au client</h3>
             <p> Commande numero <strong> {commande.id}</strong>  </p>
-            <p> produit:<strong> {commande.produitcommande.product.nom}</strong></p>
-            <p> prix: <strong> {commande.produitcommande.product.prix}</strong> CFA</p>
-             <p>taille :<strong>{commande.produitcommande.product.nom}</strong> </p>
-             <p>couleur : <strong> {commande.produitcommande.product.color}</strong></p>
-             <p>  date de la commande : <strong>{new Date(commande.created_at).toLocaleDateString()} </strong></p>
-            <p> status de la commande:<strong> 
-            {commande.statut_commande}</strong></p>
-            <p> adresse de livraison: <strong> 
+            <p> produit <strong> {commande.produitcommande.imageproduct.produit.nom}</strong></p>
+             <p>taille <strong>{commande.produitcommande.imageproduct.size}</strong> </p>
+             <p>couleur  <strong> {commande.produitcommande.imageproduct.color}</strong></p>
+             <p>  date de la commande : <strong>{new Date(commande.created_at).toLocaleDateString()} 
+             </strong></p>
+            <p> prix unitaire du produit <strong> {commande.produitcommande.imageproduct.produit.prix}
+            </strong> {commande.produitcommande.imageproduct.produit.devise.devise}</p>
+             <p>Quantité <strong>{commande.produitcommande.quantity}</strong></p>
+            <p>Montant de la commande <strong>{commande.produitcommande.subtotal}
+            </strong> {commande.produitcommande.imageproduct.produit.devise.devise}</p> 
+            <p> status de la commande <strong> 
+            {commande.statut_commande} </strong></p>
+            <p> adresse de livraison <strong> 
             {commande.adress.region.region},{commande.adress.adress} </strong></p>
-             <button className="w3-btn w3-round-xxlarge w3-green" 
-             onClick={()=>handlecommanderetrait(commande.id)}>Confirmer la livraison au client</button>
+             {user.isbureaucrate?null:
+            <button className="w3-btn w3-round-xxlarge w3-green" 
+             onClick={()=>handlecommanderetrait(commande.id)}>Confirmer la livraison au client</button>}
             </IonCol>:
             commande.statut_commande==="produit livré"?
             <IonCol size='6'>
@@ -208,70 +166,170 @@ const handlennulation=id_commande=>{
              </IonItem>
             <h4> Produit déja livré au client!</h4>
              <p> Commande numero <strong> {commande.id}</strong>  </p>
-            <p> produit:<strong> {commande.produitcommande.product.nom}</strong></p>
-            <p> prix: <strong> {commande.produitcommande.product.prix}</strong> CFA</p>
-             <p>taille :<strong>{commande.produitcommande.product.nom}</strong> </p>
-             <p>couleur : <strong> {commande.produitcommande.product.color}</strong></p>
-             <p>  date de la commande : <strong>{new Date(commande.created_at).toLocaleDateString()} </strong></p>
-            <p> status de la commande:<strong> 
+            <p> produit <strong> {commande.produitcommande.imageproduct.produit.nom}</strong></p>
+             <p>taille  <strong>{commande.produitcommande.imageproduct.size}</strong> </p>
+             <p>couleur   <strong> {commande.produitcommande.imageproduct.color}</strong></p>
+             <p>  date de la commande  <strong>{new Date(commande.created_at).toLocaleDateString()}
+              </strong></p>
+            <p> prix unitaire du produit <strong> {commande.produitcommande.imageproduct.produit.prix}
+            </strong>  {commande.produitcommande.imageproduct.produit.devise.devise}</p>
+            <p>Quantité <strong>{commande.produitcommande.quantity}</strong></p>
+             <p>Montant de la commande <strong>{commande.produitcommande.subtotal}
+            </strong> {commande.produitcommande.imageproduct.produit.devise.devise}</p> 
+            <p> status de la commande <strong> 
             {commande.statut_commande}</strong></p>
-            <p> adresse de livraison: <strong> 
+            <p> adresse de livraison  <strong> 
             {commande.adress.region.region},{commande.adress.adress} </strong></p>
             </IonCol>:null}
-             <IonCol size='6' className='mt-3'>
-            <div className='divimgdetail'>
-              {thum?
-             <Image className='imgdetail' src={`http://127.0.0.1:8001${commande.produitcommande.product.thumbnail}`} />:null}
-              {picone?
-             <Image className='imgdetail' src={`http://127.0.0.1:8001${commande.produitcommande.product.pic1}`} />:null}
-              {pictwo?
-             <Image className='imgdetail' src={`http://127.0.0.1:8001${commande.produitcommande.product.pic2}`} />:null}
-              {picthird?
-             <Image className='imgdetail' src={`http://127.0.0.1:8001${commande.produitcommande.product.pic3}`} />:null}
-             {picfour?
-             <Image className='imgdetail' src={`http://127.0.0.1:8001${commande.produitcommande.product.pic4}`} />:null}
-              {picfive?
-             <Image className='imgdetail' src={`http://127.0.0.1:8001${commande.produitcommande.product.pic5}`} />:null}
-            </div> 
-            <div>
-            <IonSegment className='segdetail'>
-              <button className='btndrop btndetail' onClick={handlethumbnail}>
-              <Image className='imgbtndetail' src={`http://127.0.0.1:8001${commande.produitcommande.product.thumbnail}`} />
-              </button>
-              <button className='btndrop btndetail' onClick={handlepicone} >
-              <Image className='imgbtndetail' src={`http://127.0.0.1:8001${commande.produitcommande.product.pic1}`} />
-              </button>
-              <button className='btndrop btndetail' onClick={handlepitwo}>
-              <Image className='imgbtndetail' src={`http://127.0.0.1:8001${commande.produitcommande.product.pic2}`} />
-              </button>
-              {commande.produitcommande.product.pic3 == null ? null:
-              <button className='btndrop btndetail' onClick={handlepicthird}>
-              <Image className='imgbtndetail' src={`http://127.0.0.1:8001${commande.produitcommande.product.pic3}`} />
-              </button>}
-              {commande.produitcommande.product.pic4 == null ? null:
-              <button className='btndrop btndetail' onClick={handlepifour}>
-              <Image className='imgbtndetail' src={`http://127.0.0.1:8001${commande.produitcommande.product.pic4}`} />
-              </button>}
-              {commande.produitcommande.product.pic5 == null ? null:
-              <button className='btndrop btndetail' onClick={handlepicfive}>
-              <Image className='imgbtndetail' src={`http://127.0.0.1:8001${commande.produitcommande.product.pic5}`} />
-              </button>}
-            </IonSegment> 
-            </div>       
-           </IonCol>
+            <IonCol size='6' className='margincol'>
+            <h4 className='centerbtn'><Link  className='linkpanier'
+            to={`/detail/${commande.produitcommande.imageproduct.produit.slug}/${commande.produitcommande.imageproduct.produit.nom}`}>
+            {commande.produitcommande.imageproduct.produit.nom}</Link></h4>
+            <Image className='imgdetail' 
+            src={`http://127.0.0.1:8001${commande.produitcommande.imageproduct.image}`} />
+            </IonCol>
            {user.isbureaucrate?
            <IonCol size='12'>
-           <span>
-            <p><Link to={`/boutique/${commande.produitcommande.product.boutique.id}/${commande.produitcommande.product.vendeur.prenom+""+commande.produitcommande.product.vendeur.nom}`}>
-              Voir le  vendeur </Link></p></span>
+            <span>
+            <p><Link 
+            to={`/boutique/${commande.produitcommande.imageproduct.produit.boutique.id}/${commande.produitcommande.imageproduct.produit.vendeur.prenom+""+commande.produitcommande.imageproduct.produit.vendeur.nom}`}>
+            Voir le  vendeur </Link></p></span>
+           <IonRow>
+           <IonCol size='8' className='centerbtn'>
+           <select
+          onChange={handletat}
+          className="w3-select">
+            <option value="" disabled selected>Modifier le status de la commande</option>
+            <option value="produit en attente de livraison " >produit en attente de livraison </option>
+            <option value="produit en cours de livraison " >produit en cours de livraison</option>
+            <option value="produit livré" >produit livré</option>
+            </select>
+           </IonCol>
+           <IonCol size='4'>
+           <button disabled={etat===""} className="w3-btn w3-round-xlarge w3-green" 
+           onClick={changement}>Changer</button>
+           </IonCol>
+           </IonRow><br/>
              {commande.statut_commande==="produit en attente de livraison "?
-             <button className="w3-btn w3-round-xxlarge w3-red" 
-             onClick={()=>handlecommanderetrait(commande.id)}>Annulation de la commande </button>:null}
+            <p className='centerbtn'> <button className="w3-btn w3-round-xxlarge w3-red" 
+             onClick={handlennulation}>Annulation de la commande </button></p>:null}
            </IonCol>:null}
-          </IonRow>
-        </IonGrid>
-       
-        </div>:<IonLoading
+           </IonRow>
+            </div>
+            :<div>
+            <IonRow>
+           {commande.statut_commande==="produit en attente de livraison "?
+            <IonCol size='6' className='mt-3'>
+             <IonItem>
+           <Link to='/'><IonIcon icon={arrowUndoOutline} className='zoomicon retour'/></Link> 
+            </IonItem>
+            <h3> ****Commande en attente d etre déposée par le vendeur</h3>
+            <p> Commande numero <strong> {commande.id}</strong>  </p>
+            <p> produit <strong> {commande.produitcommande.product.nom}</strong></p>
+             <p>taille <strong>{commande.produitcommande.product.taille}</strong> </p>
+             <p>couleur  <strong> {commande.produitcommande.product.couleur}</strong></p>
+             <p>  date de la commande : <strong>{new Date(commande.created_at).toLocaleDateString()} 
+             </strong></p>
+            <p> prix unitaire du produit <strong> {commande.produitcommande.product.prix}
+            </strong> {commande.produitcommande.product.devise.devise}</p>
+             <p>Quantité <strong>{commande.produitcommande.quantity}</strong></p>
+            <p>Montant de la commande <strong>{commande.produitcommande.subtotal}
+            </strong> {commande.produitcommande.product.devise.devise}</p> 
+            <p> status de la commande <strong> 
+            {commande.statut_commande} </strong></p>
+            <p> adresse de livraison <strong> 
+            {commande.adress.region.region},{commande.adress.adress} </strong></p>
+            <p> commission de la plateforme <strong>{commande.commission}
+            </strong> {commande.produitcommande.product.devise.devise}</p>
+            <p>Montant a remettre au vendeur <IonText className='redstyle'>
+             {commande.montant_vendeur} {commande.produitcommande.product.devise.devise}</IonText></p>
+              {user.isbureaucrate?null:
+             <button className="w3-btn w3-round-xxlarge w3-green"
+              onClick={()=>handlecommandepot(commande.id)}>Confirmer le depot du produit</button>}
+            </IonCol>: 
+            commande.statut_commande==="produit en cours de livraison "?
+            <IonCol size='6'>
+             <IonItem>
+           <Link to='/'><IonIcon icon={arrowUndoOutline} className='zoomicon retour'/></Link> 
+             </IonItem>
+            <h3>***Produit en attente d etre livré au client</h3>
+            <p> Commande numero <strong> {commande.id}</strong>  </p>
+            <p> produit <strong> {commande.produitcommande.product.nom}</strong></p>
+             <p>taille <strong>{commande.produitcommande.product.taille}</strong> </p>
+             <p>couleur  <strong> {commande.produitcommande.product.couleur}</strong></p>
+              <p>  date de la commande  <strong>{new Date(commande.created_at).toLocaleDateString()} 
+             </strong></p>
+              <p> prix unitaire du produit <strong> {commande.produitcommande.product.prix} 
+            </strong> {commande.produitcommande.product.devise.devise}
+            </p>
+            <p>Quantité <strong>{commande.produitcommande.quantity}</strong></p>
+             <p>Montant de la commande <strong>{commande.produitcommande.subtotal}
+            </strong> {commande.produitcommande.product.devise.devise}</p> 
+            <p> status de la commande <strong> 
+            {commande.statut_commande}</strong></p>
+            <p> adresse de livraison  <strong> 
+            {commande.adress.region.region},{commande.adress.adress} </strong></p>
+            {user.isbureaucrate?null:
+             <button className="w3-btn w3-round-xxlarge w3-green" 
+             onClick={()=>handlecommanderetrait(commande.id)}>Confirmer la livraison au client</button>}
+            </IonCol>:
+            commande.statut_commande==="produit livré"?
+            <IonCol size='6'>
+            <IonItem>
+           <Link to='/'><IonIcon icon={arrowUndoOutline} className='zoomicon retour'/></Link> 
+             </IonItem>
+            <h4> Produit déja livré au client!</h4>
+             <p> Commande numero <strong> {commande.id}</strong>  </p>
+            <p> produit <strong> {commande.produitcommande.product.nom}</strong></p>
+             <p>taille  <strong>{commande.produitcommande.product.taille}</strong> </p>
+             <p>couleur   <strong> {commande.produitcommande.product.couleur}</strong></p>
+             <p>  date de la commande  <strong>{new Date(commande.created_at).toLocaleDateString()}
+              </strong></p>
+            <p> prix unitaire du produit <strong> {commande.produitcommande.product.prix}
+            </strong>  {commande.produitcommande.product.devise.devise}</p>
+            <p>Quantité <strong>{commande.produitcommande.quantity}</strong></p>
+             <p>Montant de la commande <strong>{commande.produitcommande.subtotal}
+            </strong> {commande.produitcommande.product.devise.devise}</p> 
+            <p> status de la commande <strong> 
+            {commande.statut_commande}</strong></p>
+            <p> adresse de livraison  <strong> 
+            {commande.adress.region.region},{commande.adress.adress} </strong></p>
+            </IonCol>:null}
+            <IonCol size='6' className='margincol'>
+            <h4 className='centerbtn'><Link  className='linkpanier'
+            to={`/detail/${commande.produitcommande.product.slug}/${commande.produitcommande.product.slug}`}>{commande.produitcommande.product.nom}</Link></h4>
+            <Image className='imgdetail' 
+            src={`http://127.0.0.1:8001${commande.produitcommande.product.thumbnail}`} />
+            </IonCol>
+            {user.isbureaucrate?
+           <IonCol size='12'>
+            <span>
+            <p><Link to={`/boutique/${commande.produitcommande.product.boutique.id}/${commande.produitcommande.product.vendeur.prenom+""+commande.produitcommande.product.vendeur.nom}`}>
+           Voir le  vendeur </Link></p></span>
+           <IonRow>
+           <IonCol size='8' className='centerbtn'>
+           <select
+          onChange={handletat}
+          className="w3-select">
+            <option value="" disabled selected>Modifier le status de la commande</option>
+            <option value="produit en attente de livraison " >produit en attente de livraison </option>
+            <option value="produit en cours de livraison " >produit en cours de livraison</option>
+            <option value="produit livré" >produit livré</option>
+            </select>
+           </IonCol>
+           <IonCol size='4'>
+           <button disabled={etat===""} className="w3-btn w3-round-xlarge w3-green" 
+           onClick={changement}>Changer</button>
+           </IonCol>
+           </IonRow>
+           <br/>
+          {commande.statut_commande==="produit en attente de livraison "?
+            <p className='centerbtn'> <button className="w3-btn w3-round-xxlarge w3-red" 
+             onClick={handlennulation}>Annulation de la commande </button></p>:null}
+           </IonCol>:null}
+            </IonRow>
+            </div>}
+          </IonGrid> </div>:<IonLoading
           cssClass='my-custom-class'
           isOpen={showLoading}
           onDidDismiss={() => setShowLoading(false)}
@@ -279,31 +337,7 @@ const handlennulation=id_commande=>{
           duration={5000}
         />}
       
-       <IonAlert
-          isOpen={aler}
-          onDidDismiss={() => setaler(false)}
-          cssClass='my-custom-class'
-          header={'Confirm!'}
-          message={'Message <strong>text</strong>!!!'}
-          buttons={[
-            {
-              text: 'Annuler',
-              role: 'cancel',
-              cssClass: 'secondary',
-              id: 'cancel-button',
-              handler: () => {
-                //handleAnnulation(data)
-              }
-            },
-            {
-              text: 'Okay',
-              id: 'confirm-button',
-              handler: () => {
-                console.log('Confirm Okay');
-              }
-            }
-          ]}
-        />   
+        
   
      </div>
     )
@@ -312,6 +346,5 @@ const handlennulation=id_commande=>{
 export default RechercheCommande
 
 
-/* 
-            :null}
-              */
+
+

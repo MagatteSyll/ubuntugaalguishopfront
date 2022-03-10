@@ -120,7 +120,8 @@ import axios from 'axios'
 
    return (
     <div>
-      {isStaf?<NavStaff user={user}/>:
+      {isStaf?<NavStaff user={user} notifications={notifications} handlenotify={handlenotify}
+       badgenotify={badgenotify} truncateString={truncateString} />:
     <Fragment>
     { badgeload && notify?
     <Fragment>

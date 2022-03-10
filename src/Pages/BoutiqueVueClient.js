@@ -12,6 +12,8 @@ import axiosInstance from '../axios'
  
 function BoutiqueVueClient(props) {
     let id=props.match.params.id
+    let nom=props.match.params.nom
+    const isStaf=props.isStaf
     const handlebadge=props.handlebadge
     const  [produit, setproduit] = useState([])
     const [showLoading, setShowLoading] = useState(true)
@@ -94,21 +96,28 @@ const getboutique=()=>{
    setprodactif(false)
  }
 
-
+const handlavertir=()=>{
+   history.push(`/avertirlevendeur/${id}/${profil.user.prenom+""+profil.user.nom}`)
+}
+const handlactivation=()=>{
+history.push(`/reactivationboutique/${id}/${profil.user.prenom+""+profil.user.nom}`)
+}
     return (
       <div>
-        {profiload && load && vendload?
+        {profiload && load && vendload && nom===profil.user.prenom+""+profil.user.nom?
         <div>
           {user.id===profil.user.id? history.push('/maboutique'):
           <Fragment>
           <BoutiqueVueDesk profil={profil} seg={seg} handleproduitactif={handleproduitactif}
            handlevendu={handlevendu}  prodactif={prodactif} produit={produit} 
-           prodvendu={vendu} produitvendu={produitvendu}
-             islog={islog} handlecart={handlecart} user={user} />
+           prodvendu={vendu} produitvendu={produitvendu} isStaf={isStaf}
+             islog={islog} handlecart={handlecart} user={user} handlavertir={handlavertir}
+             handlactivation={handlactivation} />
+           }
           <BoutiqueVueMobile profil={profil} seg={seg} handleproduitactif={handleproduitactif}
-           handlevendu={handlevendu}
+           handlevendu={handlevendu} isStaf={isStaf} handlavertir={handlavertir}
             prodactif={prodactif} produit={produit} prodvendu={vendu} produitvendu={produitvendu}
-        islog={islog}   handlecart={handlecart} 
+        islog={islog}   handlecart={handlecart} handlactivation={handlactivation}
         user={user}  /></Fragment>}
        </div>:<IonLoading
         cssClass='my-custom-class'

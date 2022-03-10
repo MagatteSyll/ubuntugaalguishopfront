@@ -7,8 +7,8 @@ function CommandeDesk({produit,handlesubmit,handledta,handladress,calculer,livra
   return( 
     <div className='desk container'>
      <IonGrid>
-     <IonRow>
      {produit.product===null?
+      <IonRow>
       <IonCol size='6'> 
        <IonCard>
         <IonRow>
@@ -33,7 +33,32 @@ function CommandeDesk({produit,handlesubmit,handledta,handladress,calculer,livra
              </IonCol>
              </IonRow>
               </IonCard>
-      </IonCol>:
+      </IonCol>
+      {produit.imageproduct.active?
+       <IonCol size='6' className='centerbtn ml-4'>
+            <form  onSubmit={handlesubmit}>
+            <label className="w3-text"><b>Nom complet du client</b></label>
+            <input type='text' className="w3-input w3-border" required name='nom' onChange={handledta}/>
+            <label className="w3-text"><b>Numero de telephone du client</b></label>
+            <input type='tel' className="w3-input w3-border" placeholder='+221' required name='tel'
+             onChange={handledta}/>
+           <p className='mt-3'> <select
+              onChange={handladress}
+              required
+              className="w3-select"
+              > <option value="" disabled selected>Adresse de livraison</option>
+                {adress.map(ad=>
+                    <option key={ad.id} value={ad.id}>{ad.adress}({ad.region.region})</option>)}     
+             </select></p>
+             <p className='redstyle'>Payement <IonIcon icon={walletOutline}/></p>
+             <label className="w3-text "><b>Numero de telephone de votre compte GaalguiMoney</b></label>
+            <input type='tel' className="w3-input w3-border" placeholder='+221' required name='phonegaalgui' 
+            onChange={handledta}/>
+            <p className='mt-3'> <button class="w3-button w3-round-xxlarge w3-black" type='submit'>Passer la commande</button></p>
+            </form>
+            </IonCol>:<h3 className='redstyle mt-4'>Impossible de commander, produit inactif</h3>}
+      </IonRow>:
+      <IonRow>
       <IonCol size='6'>
         <IonCard>
           <IonRow>
@@ -58,8 +83,9 @@ function CommandeDesk({produit,handlesubmit,handledta,handladress,calculer,livra
                 </IonCol>
                   </IonRow>
               </IonCard>
-      </IonCol>}
-      <IonCol size='6' className='centerbtn ml-4'>
+            </IonCol>
+           {produit.product.active?
+           <IonCol size='6' className='centerbtn ml-4'>
             <form  onSubmit={handlesubmit}>
             <label className="w3-text"><b>Nom complet du client</b></label>
             <input type='text' className="w3-input w3-border" required name='nom' onChange={handledta}/>
@@ -81,7 +107,8 @@ function CommandeDesk({produit,handlesubmit,handledta,handladress,calculer,livra
             <p className='mt-3'> <button class="w3-button w3-round-xxlarge w3-black" type='submit'>Passer la commande</button></p>
             </form>
             </IonCol>
-     </IonRow>
+            :<h3 className='redstyle mt-4'>Impossible de commander, produit inactif</h3>}
+      </IonRow>}
      </IonGrid>
      </div>
   );
