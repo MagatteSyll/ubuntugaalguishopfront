@@ -14,19 +14,24 @@ function NotificationVenteDesk({notification}) {
                  <IonRow>
                      <IonCol size='5'>
                      <h4>Detail de la commande</h4>
-                     <p>{notification.commande.produitcommande.imageproduct.produit.nom}</p>
-                     <p>prix <IonText className='redstyle'>
-                      {notification.commande.produitcommande.imageproduct.produit.prix}
-                     </IonText> {notification.commande.produitcommande.imageproduct.produit.devise.devise} </p>
-                     <p>Quantité commandée <IonText className='redstyle'>
-                          {notification.commande.produitcommande.quantity} 
-                     </IonText> </p>
-                     <p>Montant de la commande <IonText className='redstyle'>
-                          {notification.commande.produitcommande.subtotal} 
-                     </IonText> {notification.commande.produitcommande.imageproduct.produit.devise.devise}  </p>
-                     <p>Commission de la plateforme
-                     <IonText className='redstyle'> {notification.commande.commission}</IonText> {notification.commande.produitcommande.imageproduct.produit.devise.devise} </p>
-                     <p>Quantité restante <IonText className='redstyle'>
+                     <p> produit <strong>
+                     {notification.commande.produitcommande.imageproduct.produit.nom} </strong></p>
+                     <p> Taille <strong>
+                     {notification.commande.produitcommande.imageproduct.size} </strong></p>
+                      <p> Couleur <strong>
+                     {notification.commande.produitcommande.imageproduct.color} </strong></p>
+                      <p> Quantité commandée  <strong>
+                     {notification.commande.produitcommande.quantity} </strong></p>
+                     <p>Prix unitaire <strong>
+                      {notification.commande.produitcommande.imageproduct.produit.prix} {notification.commande.produitcommande.imageproduct.produit.devise.devise}
+                     </strong>  </p>
+                     <p>Montant de la commande <strong>
+                 {notification.commande.produitcommande.subtotal} {notification.commande.produitcommande.imageproduct.produit.devise.devise} 
+                     </strong>   </p>
+                     <p>Commission de la plateforme <strong> 
+                     {notification.commande.commission} {notification.commande.produitcommande.imageproduct.produit.devise.devise}
+                     </strong>  </p>
+                     <p>Quantité restante de ce produit <IonText className='redstyle'>
                           {notification.commande.produitcommande.imageproduct.quantite}
                      </IonText> </p>
                      <p>Vous pouvez modifier la quantite restante de ce  produit <Link> ici </Link> </p>
@@ -43,20 +48,23 @@ function NotificationVenteDesk({notification}) {
                  <IonRow>
                      <IonCol size='5'>
                       <h4>Detail de la commande</h4>
-                     <p>{notification.commande.produitcommande.product.nom}</p>
-                     <p>prix <IonText className='redstyle'> {notification.commande.produitcommande.product.prix}
-                     </IonText> {notification.commande.produitcommande.product.devise.devise} </p>
-                     <p>Quantité commandée <IonText className='redstyle'>
+                     <p> Produit <strong>{notification.commande.produitcommande.product.nom}</strong></p>
+                    <p> Taille <strong>{notification.commande.produitcommande.product.taille}</strong></p>
+                    <p> Couleur <strong>{notification.commande.produitcommande.product.couleur}</strong></p>
+                     <p>Prix unitaire <strong> {notification.commande.produitcommande.product.prix} {notification.commande.produitcommande.product.devise.devise}
+                     </strong>  </p>
+                     <p>Quantité commandée <strong>
                           {notification.commande.produitcommande.quantity} 
-                     </IonText> </p>
-                     <p>Montant de la commande <IonText className='redstyle'>
-                          {notification.commande.produitcommande.subtotal} 
-                     </IonText> {notification.commande.produitcommande.product.devise.devise}</p>
+                     </strong> </p>
+                     <p>Montant de la commande <strong>
+                          {notification.commande.produitcommande.subtotal} {notification.commande.produitcommande.product.devise.devise} 
+                     </strong> </p>
                     <p>
-                    Commission de la plateforme <IonText className='redstyle'>{notification.commande.commission}</IonText> {notification.commande.produitcommande.product.devise.devise}</p>
-                     <p>Quantité restante <IonText className='redstyle'>
+                    Commission de la plateforme 
+                    <strong>{notification.commande.commission} {notification.commande.produitcommande.product.devise.devise}</strong> </p>
+                     <p>Quantité restante de ce produit <strong>
                           {notification.commande.produitcommande.product.qte} 
-                     </IonText> </p>
+                     </strong> </p>
                      <p>Vous pouvez modifier la quantite restante de ce  produit  <Link> ici </Link> </p>
                      </IonCol>
                      <IonCol size='5'>
@@ -65,7 +73,6 @@ function NotificationVenteDesk({notification}) {
                      </IonCol>
                  </IonRow>
              </IonCard>
-
           </IonCol>}
     </IonRow>
     </IonGrid>

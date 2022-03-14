@@ -20,7 +20,6 @@ function Inscription({getuser}) {
         nom:'',
 		password: '',
         passwordcon:'',
-        code:''
 	});
     const [formData, updateFormData] = useState(initialFormData);
 
@@ -53,9 +52,10 @@ function Inscription({getuser}) {
 		});
 	};
 
-    const verif=e=>{
-		e.preventDefault()
-	if(formData.password !==formData.passwordcon){
+    
+     const handleSubmit = (e) => {
+            e.preventDefault();
+        if(formData.password !==formData.passwordcon){
 		erreurmdp()
 		
 		return;
@@ -65,42 +65,22 @@ function Inscription({getuser}) {
 		
 		return;
 	}
-	if(formData.nom===""||formData.prenom===""||formData.phone===""
-	||formData.password===""||formData.passwordcon===""){
+	if(formData.nom===""|| formData.nom===null|| 
+	formData.nom===undefined || formData.nom.match(/^ *$/)!== null||
+	formData.prenom===""||formData.prenom===null|| 
+	formData.prenom===undefined || formData.prenom.match(/^ *$/)!== null ||formData.phone===""
+	 || formData.phone===null|| 
+	formData.phone===undefined || formData.phone.match(/^ *$/)!== null
+	||formData.password==="" ||formData.password===null|| 
+	formData.password===undefined || formData.password.match(/^ *$/) !== null||
+	formData.passwordcon==="" ||formData.passwordcon===null|| 
+	formData.passwordcon===undefined || formData.passwordcon.match(/^ *$/) !== null){
 		erreurvide()
 		return;
 	}
 
-	else{
-		let formdata=new FormData()
-		formdata.append('phone',formData.phone)
-		axios
-		//.post('https://verysoongaalguimoney.herokuapp.com/api/client/verificationphoneinsription/',formdata)
-		.post('http://127.0.0.1:8001/api/utilisateur/phonecodeconfirmation/',formdata)
-		.then(res=>{
-		  updateFormData({
-				...formData,id:res.data.id
-			})
-		   setmodal(true) 
-		   //console.log(res.data) 
-		})
-		.catch(()=>{
-			incorect()
-			return;
-		 })
-		
-	}
-		}
-     const handlecode=e=>{
-            updateFormData({
-                ...formData,
-                code: e.target.value
-            });
-        }
-       const handleSubmit = (e) => {
-            e.preventDefault();
-            //console.log(formData);
-           if(formData.code!==""){
+
+
             axios
             //.post('https://gaalguimoneyback.herokuapp.com/api/client/registration/', {
               .post('http://127.0.0.1:8001/api/utilisateur/registration/',{
@@ -108,52 +88,26 @@ function Inscription({getuser}) {
                 prenom: formData.prenom,
                 nom: formData.nom,
                 password:formData.password,
-                identifiant:formData.id,
-                code:formData.code
             })
     
             .then((res) => {
-               
-              axios
-            .post(`http://127.0.0.1:8001/api/utilisateur/connexion/`, {
-                phone: formData.phone,
-                password: formData.password,
-            })
-           .then((res) => {
-                localStorage.setItem('__jdkm__', res.data.access);
-                localStorage.setItem('__jvqm__', res.data.refresh);
-                axiosInstance.defaults.headers['Authorization'] =
-                 'JWT ' + localStorage.getItem('__jdkm__');
-                 getuser()
-				 setmodal(false)
-                history.push("/")
-               window.location.reload()
-            })
-        
+             history.push(`/confirmationphonenumber/${res.data.code_id}/${res.data.user_id}/${res.data.prenom+""+res.data.nom}`)
             });
-         }
+         
              
-           else{
-            
-            nocode()
-            return;
-                
-            }
+           
         };
 
-        const handletime=()=>{
-            setmodal(false)
-        }
+       
 	return (
 		<div>
-	<InscriptionDesk verif={verif} handleChange={handleChange}showpassword={showpassword}
+	<InscriptionDesk  handleChange={handleChange} showpassword={showpassword}
 	setshowpassword={setshowpassword} showpasswordcon={showpasswordcon} 
-   setshowpasswordcon={setshowpasswordcon} modal={modal} setmodal={setmodal}
-   handleSubmit={handleSubmit} handlecode={handlecode} handletime={handletime}/>
-<InscriptionMobile verif={verif} handleChange={handleChange}showpassword={showpassword}
+   setshowpasswordcon={setshowpasswordcon} 
+   handleSubmit={handleSubmit} />
+<InscriptionMobile handleChange={handleChange}showpassword={showpassword}
  setshowpassword={setshowpassword} showpasswordcon={showpasswordcon} 
- setshowpasswordcon={setshowpasswordcon} modal={modal} setmodal={setmodalmobile}
-  handleSubmit={handleSubmit} handlecode={handlecode} handletime={handletime}/>
+ setshowpasswordcon={setshowpasswordcon} handleSubmit={handleSubmit} />
 
  	
 		</div>

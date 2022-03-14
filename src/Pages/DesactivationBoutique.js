@@ -20,9 +20,8 @@ function DesactivationBoutique(props) {
   },[id])
   return (
     <div>
-      {load?
+      {load && notification.nature_notification==="desactivation boutique"?
     <div>
-      <h2>De l equipe GaalguiShop</h2>
     <DesactivationBoutiqueDesk notification={notification}/>
     <DesactivationBoutiqueMobile notification={notification}/>
     </div>:

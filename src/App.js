@@ -52,6 +52,10 @@ import AvertirLeVendeur from './PageStaff/AvertirLeVendeur'
 import ReactivationBoutique from './PageStaff/ReactivationBoutique'
 import SignaleProbleme from './PageStaff/SignaleProbleme'
 import DetailProbleme from './PageStaff/DetailProbleme'
+import Guide from './PageStaff/Guide'
+import NotificationReactivationBoutique from './Pages/NotificationReactivationBoutique'
+import ResultatRechercheProduit from './Pages/ResultatRechercheProduit'
+import ConfirmationPhoneNumber from './Pages/ConfirmationPhoneNumber'
 
 
 Modal.setAppElement('#root')
@@ -203,11 +207,10 @@ render={(props) =>(isStaf?<Redirect to='/' {...props}/>:<Parametres  {...props}/
 <Route  path='/annulationachat/:id' 
     render={(props) =>(isStaf?<Redirect to='/' {...props}/>:<AnnulationAchat {...props} />) }/>
 <Route  path='/noterlevendeur/:id' 
-    render={(props) =>(isStaf?<Redirect to='/' {...props}/>:<NotificationNote {...props} />) }/>
+    render={(props) =>(isStaf?<Redirect to='/' {...props}/>:<NotificationNote {...props} 
+getnotifications={getnotifications} />) }/>
 <Route  path='/annulationdevente/:id' 
     render={(props) =>(isStaf?<Redirect to='/' {...props}/>:<AnnulationVente {...props} />) }/>
-<Route  path='/desactivationboutique/:id' render={(props) =>(isStaf?<Redirect to='/' {...props}/>
-    :<DesactivationBoutique {...props} />) }/>
 <Route  path='/desactivationboutique/:id' render={(props) =>(isStaf?<Redirect to='/' {...props}/>
     :<DesactivationBoutique {...props} />) }/>
  <Route  path='/nouveauproduit/:id/:slug' render={(props) =>(isStaf?<Redirect to='/' {...props}/>
@@ -215,6 +218,23 @@ render={(props) =>(isStaf?<Redirect to='/' {...props}/>:<Parametres  {...props}/
  <Route exact path='/detailprobleme/:id' 
     render={(props)=>(user.istechnique?<DetailProbleme {...props}/>:null)}
     />
+<Route exact path='/boutiquereactivation/:id' 
+    render={(props)=>(isStaf?<Redirect to='/' {...props}/>:<NotificationReactivationBoutique {...props}/>)}
+    />
+<Route exact path='/guidestaff' 
+    render={(props)=>(isStaf?<Guide {...props}/>:null)}
+    />
+<Route exact path='/resultatrechercheproduit' render={(props)=><ResultatRechercheProduit {...props}/>}/>
+  <Route exact path='/recherchecommande/:id' render={(props) =>(isStaf?<RechercheCommande {...props} 
+      user={user} />:null) }/>
+    <Route exact path='/annulationcommande/:id' render={(props) =>(isStaf?<AnnulationCommande {...props} 
+      user={user} />:null) }/>
+    <Route exact path='/avertirlevendeur/:id/:nom'
+     render={(props)=>(user.isbureaucrate?<AvertirLeVendeur {...props}/>:null)}/>
+    <Route exact path='/reactivationboutique/:id/:nom'
+     render={(props)=>(user.isbureaucrate?<ReactivationBoutique {...props}/>:null)}/> 
+    <Route exact path='/signaldeproblemetechnique'
+     render={(props)=>(isStaf?<SignaleProbleme {...props}/>:null)}/> 
 <Footer isStaf={isStaf}/>
   </div>
 );
@@ -225,20 +245,14 @@ render={(props) =>(isStaf?<Redirect to='/' {...props}/>:<Parametres  {...props}/
     <>
     <BrowserRouter>
     <Switch>
-    <Route exact path='/connexion' render={(props)=><Connexion {...props} getuser={getuser}/>}/>
-    <Route exact path='/inscription' render={(props) =><Inscription {...props}  getuser={getuser}/>}/> 
-    <Route  path='/recucommande/:id/:nom' 
-      render={(props) => (isStaf?<Accueil/>:(islog? <RecuCommande  {...props} />:null)) }/>
-     <Route exact path='/recherchecommande/:id' render={(props) =>(isStaf?<RechercheCommande {...props} 
-      user={user} />:null) }/>
-    <Route exact path='/annulationcommande/:id' render={(props) =>(isStaf?<AnnulationCommande {...props} 
-      user={user} />:null) }/>
-    <Route exact path='/avertirlevendeur/:id/:nom'
-     render={(props)=>(user.isbureaucrate?<AvertirLeVendeur {...props}/>:null)}/>
-    <Route exact path='/reactivationboutique/:id/:nom'
-     render={(props)=>(user.isbureaucrate?<ReactivationBoutique {...props}/>:null)}/> 
-    <Route exact path='/signaldeproblemetechnique'
-     render={(props)=>(isStaf?<SignaleProbleme {...props}/>:null)}/> 
+    <Route exact path='/connexion' render={(props)=>
+        (islog?<Redirect to='/' {...props}/>:<Connexion {...props} getuser={getuser}/>)}/>
+    <Route exact path='/inscription' render={(props) =>(islog?<Redirect to='/' {...props} />:
+        <Inscription {...props}  getuser={getuser}/>)}/> 
+    <Route  exact path='/confirmationphonenumber/:code_id/:id/:nom' 
+      render={(props) =><ConfirmationPhoneNumber {...props}/> }/>
+    <Route  exact  path='/recucommande/:id/:nom' 
+      render={(props) => (isStaf?<Accueil/>:(islog? <RecuCommande  {...props} />:null)) }/>  
     <Route component={defaultroute}/> 
     </Switch>
     </BrowserRouter>

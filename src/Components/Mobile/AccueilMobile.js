@@ -41,7 +41,7 @@ function MeilleurVendeur({user,vendeur,islog}) {
                 <Link className='nodecolink' to={`/boutique/${v.id}/${v.user.prenom+""+v.user.nom}`}>
                   <p className='pnommeilleurvendeur'>{v.user.prenom} {v.user.nom}</p> 
              <img src={`http://127.0.0.1:8001${v.logo}`} alt='' className='imgpopmobile'/>
-             </Link> 
+             </Link> <br/><br/>
   
             {islog?
               <span className='centerbtn'>

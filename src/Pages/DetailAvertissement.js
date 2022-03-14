@@ -20,9 +20,9 @@ function DetailAvertissement(props) {
     },[id])
   return (
     <div>
-      {load?
+      {load && notification.nature_notification==="avertissement"?
       <div>
-        <h3>De l equipe GaalguiShop(logo)</h3>
+        <h3 className='centerbtn'>De l equipe GaalguiShop(logo)</h3>
       <DetailAvertissmentDesk notification={notification}/>
       <DetailAvertissementMobile notification={notification}/>
       </div>:<IonLoading

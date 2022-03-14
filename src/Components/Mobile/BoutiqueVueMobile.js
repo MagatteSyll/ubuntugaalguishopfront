@@ -16,7 +16,7 @@ function BoutiqueVueMobile({profil,seg,handleproduitactif,handlevendu,
   user,getboutique,isStaf,handlavertir,handlactivation}) {
   return(
     <div className='mobile'>
-    <IonGrid>
+    <IonGrid> 
       <IonRow>
         <IonCol size='4'>
         <Image  src={`http://127.0.0.1:8001${profil.logo}`} roundedCircle  className='picprofilmobile'/>
@@ -29,6 +29,7 @@ function BoutiqueVueMobile({profil,seg,handleproduitactif,handlevendu,
           {user.isbureaucrate?
             <span>
            {profil.avertissement} avertissement(s)<br/>
+           {profil.nbredesactivation} desactivation(s)<br/>
             {profil.active?
            <button className="w3-button  w3-red" onClick={handlavertir} >
             Avertir le vendeur</button>:
@@ -80,7 +81,9 @@ function BoutiqueVueMobile({profil,seg,handleproduitactif,handlevendu,
      <p >  <Link className='linkpanier' to={`/detail/${pi.slug}/${pi.nom}`}>
        <strong >{pi.nom}</strong>
       </Link> </p>
-     <strong> {pi.prix} {pi.devise.devise} </strong> 
+      {pi.active?
+     <strong> {pi.prix} {pi.devise.devise} </strong> :
+     <span className='redstyle'>Inactif!</span>}
      </div>
       </IonCol>
       ):<h1 className='centerbtn'>Aucun produit actif </h1>}
@@ -98,8 +101,10 @@ function BoutiqueVueMobile({profil,seg,handleproduitactif,handlevendu,
       <img src={`http://127.0.0.1:8001${pi.thumbnail}`} alt="" className="imgboutiquemobile"  />
       <Link className='linkpanier' to={`/detail/${pi.slug}/${pi.nom}`}>
        <p className='centerbtn'> <strong >{pi.nom}</strong></p></Link>
+
        <p>
-       <strong> {pi.prix} {pi.devise.devise} </strong>          
+       <strong> {pi.prix} {pi.devise.devise} </strong> <br/>
+       <span className='redstyle'>{pi.vendu_qte} vendu(s)</span>         
        </p> 
  
        </div>
@@ -118,36 +123,7 @@ function BoutiqueVueMobile({profil,seg,handleproduitactif,handlevendu,
 )
 } 
 
-function ProduitActif({produit,handledelete,islog,handlecart,handleconnexion,handledetail}){
 
-return(
-<div className='margseg'>
-<IonGrid>
-<IonRow>
-{ produit.length>0 ? produit.map(pi=>
-  <IonCol size='4'  key={pi.id}>
-   <ImageProduitButique produit={pi} islog={islog} handlecart={handlecart}/>
-  </IonCol>):<h1 className='centerbtn'>Aucun produit actif </h1>}
-</IonRow>
-</IonGrid>
-</div>
-)
-}
-
-function ProduitVendu({produitvendu}){
-return(
-<div>
-<IonGrid>
-<IonRow>
-{ produitvendu.length>0 ? produitvendu.map(pi=>
-<IonCol size='4' key={pi.id}>
-<ImageProduitVenduBoutiqueVu produit={pi}/>
- </IonCol>):<h1 className='centerbtn'>Aucun produit vendu </h1>}
-</IonRow>
-</IonGrid>
-</div>
-)
-}
 
 
 export default BoutiqueVueMobile;

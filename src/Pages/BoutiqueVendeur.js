@@ -24,7 +24,7 @@ function BoutiqueVendeur({truncateString,user}) {
   const  [description, setdescription] = useState();
   const iref= useRef(null)
   const [showLoading, setShowLoading] = useState(true);
-  const history=useHistory()
+  const history=useHistory() 
   const  [aler, setaler] = useState(false);
   const  [pid, setpid] = useState({
     id:'',
@@ -128,11 +128,12 @@ function BoutiqueVendeur({truncateString,user}) {
   
      const handledelete=id=>{
       axiosInstance
-      .delete(`produit/produitmanage/supprimer/${id}/`)
+      .put(`produit/produitmanage/supprimer/${id}/`)
       .then(res=>{
           //console.log(res.data)
           getproduit()
           getproduitvendu()
+          setaler(false)
       })
   }
   
@@ -236,6 +237,7 @@ function BoutiqueVendeur({truncateString,user}) {
           {
           text: 'Annuler',
           role: 'cancel',
+          handler:()=>{setaler(false)},
           cssClass: 'secondary',
             id: 'cancel-button',},
             {

@@ -3,6 +3,8 @@ import axiosInstance from '../../../axios'
 import {IonIcon} from '@ionic/react'
 import {addOutline,checkmarkDoneOutline} from 'ionicons/icons'
 
+
+
 function Verifollower({user_id,boutique_id}){
    const [isabonned, setisabonned] = useState()
    const  [load, setload] = useState(false)
@@ -40,9 +42,9 @@ function Verifollower({user_id,boutique_id}){
     {load?
     <span >
     {isabonned?
-    <button className="w3-button  w3-red" onClick={()=>removefollover(boutique_id)}>
+    <button className="w3-button w3-green " onClick={()=>removefollover(boutique_id)}>
    <IonIcon icon={checkmarkDoneOutline}/> abonné</button>
-    :<button className="w3-button  w3-red" onClick={()=>addfollower(boutique_id)}>
+    :<button className="w3-button w3-red" onClick={()=>addfollower(boutique_id)}>
      <IonIcon icon={addOutline}/>s abonner</button>}
      </span> :null}
     

@@ -113,7 +113,6 @@ history.push(`/reactivationboutique/${id}/${profil.user.prenom+""+profil.user.no
            prodvendu={vendu} produitvendu={produitvendu} isStaf={isStaf}
              islog={islog} handlecart={handlecart} user={user} handlavertir={handlavertir}
              handlactivation={handlactivation} />
-           }
           <BoutiqueVueMobile profil={profil} seg={seg} handleproduitactif={handleproduitactif}
            handlevendu={handlevendu} isStaf={isStaf} handlavertir={handlavertir}
             prodactif={prodactif} produit={produit} prodvendu={vendu} produitvendu={produitvendu}

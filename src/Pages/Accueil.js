@@ -35,7 +35,7 @@ function Accueil({isstaf,user,islog}) {
         .then(res=>{
             setoccas(res.data)
             
-            setoccasload(true)
+            setoccasload(true) 
         })
 
     }

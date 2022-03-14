@@ -3,8 +3,10 @@ import React,{ Fragment} from 'react';
 import BarSearch from '../BarSearch';
 import { NavDropdown,} from 'react-bootstrap'
 import {IonIcon, IonSegment,
-   IonPopover, IonText,IonListHeader, IonGrid, IonRow, IonCol, IonCard,IonBadge, IonItem} from '@ionic/react'
-import {cartOutline,notificationsOutline,pricetagOutline,cashOutline,cardOutline,shirtOutline,walletOutline,
+   IonPopover, IonText,IonListHeader, IonGrid, IonRow,
+   IonList, IonCol, IonCard,IonBadge, IonItem,IonSearchbar,IonLabel} from '@ionic/react'
+import {cartOutline,notificationsOutline,pricetagOutline,cashOutline,cardOutline,
+  shirtOutline,walletOutline,searchOutline,
 personCircleOutline,settingsOutline,caretDownOutline} from 'ionicons/icons'
 import {Link} from 'react-router-dom'
 
@@ -12,10 +14,11 @@ import {Link} from 'react-router-dom'
 
 
 
-function NavDesk({islog,handlevendre,handlenotify,handlaide,  handleachat, handleboutique,
-   handlecommande, handlevente,popachat ,popboutik, popcommande, popvente,popanier,handleconnexion, handleinscription,
-   handlepanier,badgecart,handlecompte,user,badgenotify,notifications,truncateString }) {
-      console.log(islog)
+function NavDesk({islog,handlevendre,handlenotify,handlaide,handleachat, handleboutique,
+   handlecommande, handlevente,handleconnexion, handleinscription,
+   handlepanier,badgecart,handlecompte,user,badgenotify,notifications,truncateString,
+   handlerecherche,gosearch }) {
+      
     return (
       <div className='desk'>
       <div className='navdesk'>
@@ -42,8 +45,7 @@ function NavDesk({islog,handlevendre,handlenotify,handlaide,  handleachat, handl
           </IonCol>
          <IonCol size='3' style={{marginLeft:'35px'}}>
         <Me handleachat={handleachat} handleboutique={handleboutique} handlecommande={handlecommande}
-        handlevente={handlevente} popachat={popachat} popboutik={popboutik} popcommande={popcommande}
-         popvente={popvente} handleconnexion={handleconnexion} handleinscription={handleinscription} 
+        handlevente={handlevente} handleconnexion={handleconnexion} handleinscription={handleinscription} 
           handlecompte={handlecompte} islog={islog}/>
         </IonCol>
            <IonCol size='1'>
@@ -68,33 +70,30 @@ function NavDesk({islog,handlevendre,handlenotify,handlaide,  handleachat, handl
         </IonSegment>
         </IonCol>
         <IonCol size='6'>
-           <BarSearch/>
+        <IonRow>
+        <IonCol size='10'>
+        <IonSearchbar
+     onIonChange={(handlerecherche)}
+     placeholder='rechercher un produit'
+    onKeyPress={(e) => e.key === 'Enter' && gosearch()}
+    className='searchbar'
+      /> 
+        </IonCol>
+         <IonCol size='2'>
+           <button className='btndrop' 
+      onClick={gosearch}> <IonIcon icon={searchOutline} className='zoomsearch'/></button>
+        </IonCol>
+        </IonRow>
+     
         </IonCol>
        </IonRow>
      </IonGrid>
     </div>
-    <IonPopover
-   isOpen={popanier} 
-   >
-   <IonListHeader>Pour voir votre panier</IonListHeader>
-    <IonGrid>
-      <IonRow>
-        <IonCol size='12'>
-         <IonCard>Logo logo</IonCard>
-        </IonCol>
-        <IonCol size='12'>
-        <IonText className='centerbtn'><button  onClick={handleconnexion} style={{color:'magenta'}} className='btndrop' onClick={handleconnexion}>Connectez vous </button> ou
-         <button  onClick={handleinscription}  style={{color:'purple'}}className='btndrop'>Inscrivez vous</button>
-       .</IonText>
-        </IonCol>
-      </IonRow>
-    </IonGrid>    
-  </IonPopover >
     </div>
     )
 }
 function Me({handleachat, handleboutique,
-  handlecommande,handlevente, popachat ,popboutik, popcommande, popvente,handleconnexion, handleinscription
+  handlecommande,handlevente,handleconnexion, handleinscription
   ,handlecompte,islog}) {
   return (
     <Fragment>
@@ -114,68 +113,6 @@ function Me({handleachat, handleboutique,
     </button></NavDropdown.Item>:null}
     </div>
   </NavDropdown>
-  <IonPopover
-   isOpen={popboutik} 
-   >
-   <IonListHeader>Votre boutique vous attend</IonListHeader>
-    <IonGrid>
-      <IonRow>
-        <IonCol size='12'>
-         <IonCard>Logo logo</IonCard>
-        </IonCol>
-        <IonCol size='12'>
-        <IonText className='centerbtn'><button  onClick={handleconnexion} style={{color:'magenta'}} className='btndrop' onClick={handleconnexion}>Connectez vous </button> ou
-         <button  onClick={handleinscription}  style={{color:'purple'}}className='btndrop'>Inscrivez vous</button> pour ajouter des produits.</IonText>
-        </IonCol>
-      </IonRow>
-    </IonGrid>
-  </IonPopover >
-  <IonPopover isOpen={popvente} className='pop' side="start">
-    <IonGrid>
-      <IonRow>
-        <IonCol size='12'>
-        <IonListHeader>Pour Vendre sur </IonListHeader>
-        </IonCol>
-        <IonCol size='12'>
-         <IonCard>Logo logo</IonCard>
-        </IonCol>
-        <IonCol size='12'>
-        <IonText className='centerbtn'><button  onClick={handleconnexion} style={{color:'magenta'}} className='btndrop'>Connectez vous </button>  ou
-         <button  onClick={handleinscription}  style={{color:'purple'}}className='btndrop'>Inscrivez vous</button>
-         </IonText>
-        </IonCol>
-      </IonRow>
-    </IonGrid>
-  </IonPopover>
-  <IonPopover isOpen={popachat} className='pop'>
-  <IonListHeader>Pour bebeficier de tous les produits </IonListHeader>
-    <IonGrid>
-      <IonRow>
-        <IonCol size='12'>
-         <IonCard>Logo logo</IonCard>
-        </IonCol>
-        <IonCol size='12'>
-        <IonText className='centerbtn'><button onClick={handleconnexion} style={{color:'magenta'}} className='btndrop'>Connectez vous </button> ou
-         <button  onClick={handleinscription}  style={{color:'purple'}}className='btndrop'>Inscrivez vous</button> </IonText>
-        </IonCol>
-      </IonRow>
-    </IonGrid>
-  </IonPopover>
-  <IonPopover isOpen={popcommande} className='pop'>
-  <IonListHeader>Pour beneficier de tous les produits</IonListHeader>
-    <IonGrid>
-      <IonRow>
-        <IonCol size='12'>
-         <IonCard>Logo logo</IonCard>
-        </IonCol>
-        <IonCol size='12'>
-        <IonText className='centerbtn'><button  onClick={handleconnexion} style={{color:'magenta'}} className='btndrop'>Connectez vous </button> ou
-         <button  onClick={handleinscription}  style={{color:'purple'}}className='btndrop'>Inscrivez vous</button>
-         </IonText>
-        </IonCol>
-      </IonRow>
-    </IonGrid>
-  </IonPopover>
   </Fragment>
   );
 }
@@ -198,24 +135,32 @@ function Notify({badgenotify,islog,notifications,truncateString,handlenotify}) {
     {notifications.map(notify=>
     <NavDropdown.Item key={notify.id}>
       {notify.nature_notification==='avertissement'?
-     <IonText> <Link to={`/avertissement/${notify.id}`} className='link'> {truncateString(notify.message,30)} </Link></IonText> 
+     <IonText> <Link to={`/avertissement/${notify.id}`} className='link'> {truncateString(notify.message,45)} </Link></IonText> 
      :
      notify.nature_notification==='etat commande'?
-     <IonText> <Link to={`/etatcommande/${notify.id}`} className='link'> {truncateString(notify.message,30)} </Link></IonText> 
+     <IonText> <Link to={`/etatcommande/${notify.id}`} className='link'> {truncateString(notify.message,45)} </Link></IonText> 
      :
      notify.nature_notification==='vente'?
-     <IonText> <Link to={`/notificationdevente/${notify.id}`} className='link'> {truncateString(notify.message,30)} </Link></IonText> 
+     <IonText> <Link to={`/notificationdevente/${notify.id}`} className='link'> {truncateString(notify.message,45)} </Link></IonText> 
      :
      notify.nature_notification==='annulation d achat'?
-     <IonText> <Link to={`/annulationachat/${notify.id}`} className='link'> {truncateString(notify.message,30)} </Link></IonText> 
+     <IonText> <Link to={`/annulationachat/${notify.id}`} className='link'> 
+     {truncateString(notify.message,45)} </Link></IonText> 
      :
      notify.nature_notification==='annulation de vente'?
-     <IonText> <Link to={`/annulationdevente/${notify.id}`} className='link'> {truncateString(notify.message,30)} </Link></IonText> 
+     <IonText> <Link to={`/annulationdevente/${notify.id}`} className='link'> {truncateString(notify.message,45)} </Link></IonText> 
      :notify.nature_notification==='desactivation boutique'?
-     <IonText> <Link to={`/desactivationboutique/${notify.id}`} className='link'> {truncateString(notify.message,30)} </Link>
+     <IonText> <Link to={`/desactivationboutique/${notify.id}`} className='link'> {truncateString(notify.message,45)} </Link>
      </IonText>:notify.nature_notification==='pour follower'?
      <IonText> <Link to={`/nouveauproduit/${notify.id}/${notify.produit.nom}`} className='link'> {truncateString(notify.message,45)} </Link>
-     </IonText>:null}
+     </IonText>:
+     notify.nature_notification==='reactivation boutique'?
+     <IonText> <Link to={`/boutiquereactivation/${notify.id}`} className='link'> 
+     {truncateString(notify.message,30)} </Link></IonText> 
+      :notify.nature_notification==='note vendeur'?
+      <IonText> <Link to={`/noterlevendeur/${notify.id}`} className='link'> {truncateString(notify.message,45)} </Link>
+     </IonText>
+     :null}
     </NavDropdown.Item>)}  
     </div>:<NavDropdown.Item >
       Oups!Vous n avez aucune notification 

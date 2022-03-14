@@ -12,7 +12,7 @@ import { IonGrid,IonCol,IonRow,IonButton, IonSegment,IonLoading,
 import { Rating,} from '@mui/material';
 import { ellipsisHorizontalOutline } from 'ionicons/icons'
 
-
+ 
  
 function BoutiqueVendeurDesk({produit,produitvendu, botique, modal,  seg,
   prodactif, prodvendu,  handlefile, user,
@@ -60,7 +60,7 @@ function BoutiqueVendeurDesk({produit,produitvendu, botique, modal,  seg,
  <div className=" row -3 m-3">
   <IonSegment  className='segboutiquevendeur'value= {seg}>
     <IonSegmentButton className='segbtnboutique' onClick={handleproduitactif} value='prodactif'>
-     <IonLabel>Produits actifs</IonLabel>
+     <IonLabel>Tous les produits</IonLabel>
       </IonSegmentButton>
     <IonSegmentButton className='segbtnboutique' onClick={handlevendu} value='prodvendu'>
     <IonLabel>Produits vendus</IonLabel>  
@@ -74,14 +74,12 @@ function BoutiqueVendeurDesk({produit,produitvendu, botique, modal,  seg,
   { produitvendu.length>0 ? produitvendu.map(pi=>
     <IonCol size='3' key={pi.id}>
      <div className='singleproduit'>
-      <button className='btndrop'
-      onClick={()=>handlepopenvendu(pi.id,pi.nom,pi.slug,pi.active)}> 
-      <IonIcon icon={ellipsisHorizontalOutline} className='zoomicon'/></button>
       <img src={`http://127.0.0.1:8001${pi.thumbnail}`} alt="" className="imgboutiquedesk"  />
       <Link className='linkpanier' to={`/detail/${pi.slug}/${pi.nom}`}>
        <p className='centerbtn'> <strong >{pi.nom}</strong></p></Link>
        <p className='centerbtn'>
-      <strong> {pi.prix} {pi.devise.devise} </strong>   
+      <strong> {pi.prix} {pi.devise.devise} </strong> <br/>
+      <span className='redstyle'>{pi.vendu_qte} vendu(s)</span>  
        </p> 
        </div>
     </IonCol>
@@ -100,9 +98,10 @@ function BoutiqueVendeurDesk({produit,produitvendu, botique, modal,  seg,
      <Link className='linkpanier' to={`/detail/${pi.slug}/${pi.nom}`}>
     <p className='centerbtn'> <strong >{pi.nom}</strong> </p>
       </Link>
+      {pi.active?
        <p className='centerbtn'> 
     <strong> {pi.prix} {pi.devise.devise}</strong>  
-    </p>     
+    </p>:<span className='redstyle'>Inactif!</span>}   
     </IonCol>)
       :<h1 className='centerbtn'>Aucun produit actif </h1>}
   </IonRow>

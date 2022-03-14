@@ -12,9 +12,11 @@ function ProduitImageDisplay({produitimage,produit,user,islog,handlecart,handlec
                 color:produitimage[0].color,
                 quantite:produitimage[0].quantite,
                 id:produitimage[0].id,
-                activa:produitimage[0].active
+                activa:produitimage[0].active,
+                nbrvendu:produitimage[0].qte_vendu,
+                vendu:produitimage[0].vendu
             } 
-        )
+        ) 
     const handleclick=id=>{
        let  image=produitimage.find(x => x.id ===id).image;
        let size=produitimage.find(x => x.id ===id).size;
@@ -22,7 +24,10 @@ function ProduitImageDisplay({produitimage,produit,user,islog,handlecart,handlec
        let qte=produitimage.find(x => x.id ===id).quantite;
        let lid=produitimage.find(x => x.id ===id).id;
        let activa =produitimage.find(x => x.id ===id).active;
-        setimage({...image,image:image,size:size,color:color,quantite:qte,id:lid,activa:activa})
+       let nbrvendu=produitimage.find(x => x.id ===id).qte_vendu;
+       let vendu=produitimage.find(x => x.id ===id).vendu;
+setimage({...image,image:image,size:size,color:color,quantite:qte,id:lid,
+    activa:activa,nbrvendu:nbrvendu,vendu:vendu})
     }
   return (
     <div>
@@ -33,7 +38,6 @@ function ProduitImageDisplay({produitimage,produit,user,islog,handlecart,handlec
      
     <IonCol size='12' className='container' >
     <h3>{produit.nom}</h3><br/>
-    <p>{produit.description}</p>
     <Image className='imgdetailmobile' src={`http://127.0.0.1:8001${image.image}`} />
    
     <div className='mt-2 container'>
@@ -45,11 +49,14 @@ function ProduitImageDisplay({produitimage,produit,user,islog,handlecart,handlec
     </IonSegment>
     </div>
     </IonCol>
-    <IonCol size='10' className='container'>      
-             <p>taille:<strong> {image.size}</strong> </p>
-             <p>couleur:<strong> {image.color}</strong></p>
+    <IonCol size='10' className='container'>  
+              <p>{produit.description}</p>    
+             <p>taille<strong> {image.size}</strong> </p>
+             <p>couleur<strong> {image.color}</strong></p>
              <p>Quantité disponible:<strong> {image.quantite}</strong></p>
-             <h3> <IonText className='redstyle'> {produit.prix} </IonText> CFA</h3>
+             <h3> <strong> {produit.prix} {produit.devise.devise} </strong> </h3>
+             {image.vendu?<span className='redstyle'>{image.nbrvendu} vendu(s)</span>:null}
+
              {user.id===produit.vendeur.id?<IonIcon icon={starOutline} className='iconvendeur'/>
              :<p>
              {image.activa?
@@ -68,7 +75,6 @@ function ProduitImageDisplay({produitimage,produit,user,islog,handlecart,handlec
     <IonGrid>
    <IonRow>
    <h3 >{produit.nom}</h3><br/>
-   <p>{produit.description}</p>
   <IonCol size='12' className='container' >
     <div>
     <Image className='imgdetailmobile' src={`http://127.0.0.1:8001${image.image}`} />
@@ -84,10 +90,11 @@ function ProduitImageDisplay({produitimage,produit,user,islog,handlecart,handlec
     </IonCol>
     <IonCol size='10' className='container'>
  <p>{produit.description}</p>
-  <p>taille:<strong> {produit.taille}</strong> </p>
-   <p>couleur:<strong> {produit.couleur}</strong></p>
- <p>Quantité disponible:<strong> {produit.qte}</strong></p>
- <h3> <IonText className='redstyle'> {produit.prix} </IonText> CFA</h3>
+  <p>taille <strong> {produit.taille}</strong> </p>
+   <p>couleur <strong> {produit.couleur}</strong></p>
+ <p>Quantité disponible <strong> {produit.qte}</strong></p>
+ <h3> <strong> {produit.prix} {produit.devise.devise} </strong> </h3>
+ {produit.vendu?<span className='redstyle'>{produit.vendu_qte} vendu(s)</span>:null}<br/>
  {user.id===produit.vendeur.id?<IonIcon icon={starOutline} className='iconvendeur'/>
      :<p>
      {produit.active?

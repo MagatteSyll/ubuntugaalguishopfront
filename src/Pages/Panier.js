@@ -67,7 +67,7 @@ function Panier({handlebadge,truncateString}) {
         .then(res=>{
           handlecart()
           handlebadge()
-         
+          
         })
       .catch(()=>{
         return;

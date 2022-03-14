@@ -20,6 +20,10 @@ function Connexion({getuser}) {
 		position:toast.POSITION.TOP_CENTER,
 		autoClose:false
 	  });
+	const erreurvalide = () => toast.error("Verifiez la validité des donnees entrees ",{
+		position:toast.POSITION.TOP_CENTER,
+		autoClose:false
+	  });
 	const [formData, updateFormData] = useState(initialFormData);
 
 	const handlechange = (e) => {
@@ -51,7 +55,11 @@ function Connexion({getuser}) {
 				window.location.reload()
 				//console.log(res);
 				//console.log(res.data);
-			});
+			})
+		   .catch(()=>{
+		   	erreurvalide()
+		   	return;
+		   })
 		}
 	};
 	

@@ -10,7 +10,7 @@ import { ellipsisHorizontalOutline } from 'ionicons/icons'
 import {Link} from 'react-router-dom'
 
 
-
+ 
 function BoutiqueVendeurMobile({produit,produitvendu, botique, modal,  seg,
   prodactif, prodvendu,  handlefile, user,
   handleclick, handledes, handledescription, handleclose, handleopen, handleproduitactif,
@@ -71,7 +71,9 @@ function BoutiqueVendeurMobile({produit,produitvendu, botique, modal,  seg,
      <p >  <Link className='linkpanier' to={`/detail/${pi.slug}/${pi.nom}`}>
        <strong >{pi.nom}</strong>
       </Link> </p>
+      {pi.active?
      <strong> {pi.prix} {pi.devise.devise} </strong> 
+     :<span className='redstyle'>Inactif!</span>}
      </div>
       </IonCol>
       ):<h1 className='centerbtn'>Aucun produit actif </h1>}
@@ -86,14 +88,12 @@ function BoutiqueVendeurMobile({produit,produitvendu, botique, modal,  seg,
     {produitvendu.length>0 ? produitvendu.map(pi=>
     <IonCol size='4' key={pi.id}>
       <div className='singleproduit'>
-      <button className='btndrop'
-      onClick={()=>handlepopenvendu(pi.id,pi.nom,pi.slug,pi.active)}> 
-     <IonIcon icon={ellipsisHorizontalOutline} className='zoomicon'/></button>
       <img src={`http://127.0.0.1:8001${pi.thumbnail}`} alt="" className="imgboutiquemobile"  />
       <Link className='linkpanier' to={`/detail/${pi.slug}/${pi.nom}`}>
        <p className='centerbtn'> <strong >{pi.nom}</strong></p></Link>
        <p>
-       <strong> {pi.prix} {pi.devise.devise} </strong>          
+       <strong> {pi.prix} {pi.devise.devise} </strong><br/>  
+        <span className='redstyle'>{pi.vendu_qte} vendu(s)</span>       
        </p> 
  
        </div>

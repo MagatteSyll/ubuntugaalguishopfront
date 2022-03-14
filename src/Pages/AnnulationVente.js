@@ -21,7 +21,7 @@ function AnnulationVente(props) {
    
   return (
     <div>
-      {load?
+      {load && notification.nature_notification==="annulation de vente"?
    <div>
   <AnnulationVenteDesk notification={notification}/>
   <AnnulationVenteMobile notification={notification} />      

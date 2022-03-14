@@ -31,8 +31,8 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 //Inscription Desktop
-function InscriptionDesk({verif,handleChange,showpassword,setshowpassword,
-	showpasswordcon,setshowpasswordcon,modal,setmodal,handleSubmit,handlecode,handletime}) {
+function InscriptionDesk({handleChange,showpassword,setshowpassword,
+	showpasswordcon,setshowpasswordcon,handleSubmit}) {
 
 
 	const classes = useStyles();
@@ -43,11 +43,11 @@ function InscriptionDesk({verif,handleChange,showpassword,setshowpassword,
             <IonGrid>
              <IonRow>
              <IonCol size='5'>
-             <h1 style={{color:'red'}}>GaalguiShop(logo)</h1>
+             <h1 className='redstyle'>GaalguiShop(logo)</h1>
              </IonCol>
              <IonCol size='9'>
                 <div>
-				<form className='form' onSubmit={verif}>
+				<form className='form' onSubmit={handleSubmit}>
                 <Avatar className={classes.avatar}></Avatar>	
                 <p className='centerbtn'> <label>Numero de telephone valide <IonText className='asterix'>*</IonText> </label></p>
 					<Input
@@ -149,33 +149,7 @@ function InscriptionDesk({verif,handleChange,showpassword,setshowpassword,
 						</div>
 				
 			</div>
-		 <IonModal
-				isOpen={modal}
-				swipeToClose={true}
-				// presentingElement={router || undefined}
-				cssClass='my-custom-class'
-				>
-			<form onSubmit={handleSubmit}>
-			<div className='divmodalinscription'>
-				<div className="w3-section">
-			  <p className='centerbtn'><label ><b>Code de verification  du numero de telephone
-				 <IonText className='asterix'>*</IonText> </b></label></p>
-				<p className='centerbtn'>
-				<input
-					className="w3-input w3-border w3-margin"
-					required
-					type='number'
-					onChange={handlecode}
-					/>
-					</p>
-			<p className='centerbtn'>
-		<button className="w3-btn w3-round-xxlarge w3-pink" type='submit'>Confirmer</button>
-		</p>		
-			</div>
-	
-		</div>
-		</form> 
-        </IonModal> 
+		 
 		
         </div>    
       

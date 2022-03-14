@@ -18,9 +18,9 @@ function DetailNotificationVente(props) {
       setload(true)
     })
   },[id]) 
-  return (
+  return ( 
     <div>
-     {load?
+     {load && notification.nature_notification==="vente"?
      <div>
     <NotificationVenteDesk notification={notification}/>
     <NotificationVenteMobile notification={notification}/>

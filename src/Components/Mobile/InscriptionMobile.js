@@ -13,15 +13,15 @@ import {personCircleOutline} from 'ionicons/icons'
 import 'react-toastify/dist/ReactToastify.css'; 
 
 
-function InscriptionMobile({verif,handleChange,showpassword,setshowpassword,
-  showpasswordcon,setshowpasswordcon,modal,setmodal,handleSubmit,handlecode,handletime}) {
+function InscriptionMobile({handleChange,showpassword,setshowpassword,
+  showpasswordcon,setshowpasswordcon,handleSubmit}) {
  
     return (
         <div className='mobile'>
         
            <h1 className='ion-text-center'>GaalguiMoney(logo)</h1>
            <div  className='formmobile'>
-            <form onSubmit={verif} className='ion-align-self-center ion-padding'>
+            <form onSubmit={handleSubmit} className='ion-align-self-center ion-padding'>
                 <IonGrid>
             <IonRow className="ion-align-items-center">
             <IonCol size='6'>
@@ -113,33 +113,6 @@ function InscriptionMobile({verif,handleChange,showpassword,setshowpassword,
                 </IonText></p>
                 </IonCol>
               </div>
-
-       <IonModal
-				isOpen={modal}
-				swipeToClose={true}
-				onDidDismiss={() => setmodal(false)}
-				>
-			<div className='divmodalinscription'>
-			<form className="w3-container" onSubmit={handleSubmit}>
-				<div className="w3-section">
-			  <p className='centerbtn'><label ><b>Code de verification du numero de telephone* </b></label></p>
-				<p className='centerbtn'>
-				<input
-					className="w3-input w3-border w3-margin"
-					required
-					style={{MozAppearance:'textfield'}}
-					id="flecheinput"
-				   type='number'
-						onChange={handlecode}
-					/>
-					</p>
-			<p className='centerbtn'>
-		<button className="w3-btn w3-round-xxlarge w3-pink" type="submit">Confirmer</button>
-		</p>		
-			</div>
-		</form>
-		</div>
-        </IonModal> 
         
         </div>
     )

@@ -1,12 +1,12 @@
 import React,{useState,useEffect} from 'react'
 import {IonLoading} from '@ionic/react'
 import axiosInstance from '../axios'
-import DetailEtatCommandeDesk from '../Components/Desk/DetailEtatCommandeDesk'
-import DetailEtatCommandeMobile from '../Components/Mobile/DetailEtatCommandeMobile'
+import {Link} from 'react-router-dom'
 
 
-function DetailEtatCommande(props) {
-    let id=props.match.params.id
+
+function NotificationReactivationBoutique(props){
+	let id=props.match.params.id
     const  [notification, setnotification] = useState([])
     const  [load, setload] = useState(false)
     const [showLoading, setShowLoading] = useState(true);
@@ -20,25 +20,28 @@ function DetailEtatCommande(props) {
       })
     },[id])
 
-  return (
+return(
+ <div>
+ {load && notification.nature_notification==="reactivation boutique"?
+ <div className='w3-margin'>
+ <h1>{notification.message}</h1>
+ <h2>Nous vous invite a un plus grand respect<Link> de la politique de confidentialite
+ </Link> et vous souhaite un rebienvenu dans la famille .
+ Vous pouvez modifier l etat actuel des produits de votre <Link to='/maboutique'>boutique</Link>
+ </h2>
 
-    <div>
-      {load && notification.nature_notification==="etat commande"?
-      <div>
-       <DetailEtatCommandeDesk notification={notification}/>
-       <DetailEtatCommandeMobile notification={notification}/>
-      </div>
-      :<IonLoading
+ 
+ </div>:<IonLoading
       cssClass='my-custom-class'
       isOpen={showLoading}
       onDidDismiss={() => setShowLoading(false)}
       message={'Chargement...'}
       duration={5000}
     />}
-       
 
-    </div>
-  )
+ </div>
+
+);
 }
 
-export default DetailEtatCommande
+export default NotificationReactivationBoutique;

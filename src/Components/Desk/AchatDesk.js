@@ -1,18 +1,21 @@
 import React from 'react'
-import { IonCard, IonCol, IonGrid, IonRow, IonText } from '@ionic/react'
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
+import {IonGrid,IonRow,IonCol} from '@ionic/react'
 
-function AchatMobile({achat}) {
-  return (
-    <div className='mobile container'>
+
+
+function AchatDesk({achat}) {	
+
+return(
+  <div className='desk ml-3'>
   <IonGrid>
    <IonRow>
    {achat.map(ach=>
-    <IonCol size='6'>
+    <IonCol size='4'>
     {ach.produitcommande.product===null?
     <div>
     <img src={`http://127.0.0.1:8001${ach.produitcommande.imageproduct.image}`} alt="" 
-    className="imgboutiquemobile"/>
+    className="imgboutiquedesk"/>
     <Link className='linkpanier'
   to={`/detail/${ach.produitcommande.imageproduct.produit.slug}/${ach.produitcommande.imageproduct.produit.nom}`}>
     <p className='centerbtn'> <strong >{ach.produitcommande.imageproduct.produit.nom}</strong></p></Link>
@@ -24,7 +27,7 @@ function AchatMobile({achat}) {
     </div>:
     <div>
    <img src={`http://127.0.0.1:8001${ach.produitcommande.product.thumbnail}`} alt="" 
-    className="imgboutiquemobile"/>
+    className="imgboutiquedesk"/>
     <Link className='linkpanier'
   to={`/detail/${ach.produitcommande.product.slug}/${ach.produitcommande.product.nom}`}>
     <p className='centerbtn'> <strong >{ach.produitcommande.product.nom}</strong></p></Link>
@@ -41,7 +44,11 @@ function AchatMobile({achat}) {
   </IonGrid>
  
   </div>
-  )
+
+);
+
 }
 
-export default AchatMobile
+export default AchatDesk;
+
+

@@ -31,7 +31,7 @@ function NotificationFollower(props) {
   }
   return (
     <div>
-    {load?
+    {load && notification.nature_notification==="pour follower"?
     <div>
      <NotificationFollowerDesk notification={notification} handlecart={handlecart}/>
      <NotificationFollowerMobile notification={notification} handlecart={handlecart}/>

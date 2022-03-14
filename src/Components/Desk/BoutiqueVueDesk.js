@@ -31,6 +31,7 @@ function BoutiqueVueDesk({profil,seg,handleproduitactif,handlevendu,
                 {user.isbureaucrate?
                   <span>
                   {profil.avertissement} avertissement(s)<br/>
+                  {profil.nbredesactivation} desactivation(s)<br/>
                   {profil.active?
                   <button className="w3-button  w3-red" onClick={handlavertir} >
                   Avertir le vendeur</button>:
@@ -68,7 +69,7 @@ function BoutiqueVueDesk({profil,seg,handleproduitactif,handlevendu,
  <div className=" row -3 m-3">
   <IonSegment  className='segboutiquevendeur'value= {seg}>
     <IonSegmentButton className='segbtnboutique' onClick={handleproduitactif} value='prodactif'>
-     <IonLabel>Produits actifs</IonLabel>
+     <IonLabel>Tous les produits</IonLabel>
       </IonSegmentButton>
     <IonSegmentButton className='segbtnboutique' onClick={handlevendu} value='prodvendu'>
     <IonLabel>Produits vendus</IonLabel>  
@@ -86,7 +87,8 @@ function BoutiqueVueDesk({profil,seg,handleproduitactif,handlevendu,
       <Link className='linkpanier' to={`/detail/${pi.slug}/${pi.nom}`}>
        <p className='centerbtn'> <strong >{pi.nom}</strong></p></Link>
        <p className='centerbtn'>
-      <strong> {pi.prix} {pi.devise.devise} </strong>   
+      <strong> {pi.prix} {pi.devise.devise} </strong><br/>
+      <span className='redstyle'>{pi.vendu_qte} vendu(s)</span> 
        </p> 
        </div>
     </IonCol>
@@ -103,9 +105,10 @@ function BoutiqueVueDesk({profil,seg,handleproduitactif,handlevendu,
      <Link className='linkpanier' to={`/detail/${pi.slug}/${pi.nom}`}>
     <p className='centerbtn'> <strong >{pi.nom}</strong> </p>
       </Link>
-       <p className='centerbtn'> 
+      {pi.active?
+    <p className='centerbtn'> 
     <strong> {pi.prix} {pi.devise.devise}</strong>  
-    </p>     
+    </p>:<p className='redstyle'>Inactif!</p> }    
     </IonCol>)
       :<h1 className='centerbtn'>Aucun produit actif </h1>}
   </IonRow>
@@ -126,37 +129,7 @@ function BoutiqueVueDesk({profil,seg,handleproduitactif,handlevendu,
 )
 } 
 
-function ProduitActif({produit,islog,handlecart,handleconnexion,handledetail}){
 
-return(
-<div className='margseg'>
-<IonGrid>
-<IonRow>
-{ produit.length>0 ? produit.map(pi=>
-  <IonCol size='3' key={pi.id}>
-     <ImageProduitBoutiqueVu produit={pi} islog={islog} handlecart={handlecart}/> 
-    </IonCol>):<h1 className='centerbtn'>Aucun produit actif </h1>}
-</IonRow>
-</IonGrid>
-</div>
-)
-}
-
-function ProduitVendu({produitvendu,}){
-return(
-<div>
-<IonGrid>
-<IonRow>
-{ produitvendu.length>0 ? produitvendu.map(pi=>
-  <IonCol size='3'>
-   <ImageProduitVenduBoutiue produit={pi}/>
-
-    </IonCol>):<h1 className='centerbtn'>Aucun produit vendu </h1>}
-</IonRow>
-</IonGrid>
-</div>
-)
-}
 
 
 

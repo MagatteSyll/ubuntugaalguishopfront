@@ -10,3 +10,4 @@ function DetailMobile({produit, islog, handlecart,user,handlenonlog,produitimage
 }
 
 export default DetailMobile;
+ 

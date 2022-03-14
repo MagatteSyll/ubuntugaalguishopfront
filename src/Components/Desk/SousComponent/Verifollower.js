@@ -40,7 +40,7 @@ function Verifollower({user_id,boutique_id}){
     {load?
     <span >
     {isabonned?
-    <button className="w3-button  w3-red" onClick={()=>removefollover(boutique_id)}>
+    <button className="w3-button  w3-green" onClick={()=>removefollover(boutique_id)}>
      <IonIcon icon={checkmarkDoneOutline}/>abonné</button>
     :<button className="w3-button  w3-red" onClick={()=>addfollower(boutique_id)}>
      <IonIcon icon={addOutline}/>s abonner</button>}

@@ -51,7 +51,7 @@ return(
  <div>
 {load && nom===boutique.user.prenom+""+boutique.user.nom?
        <form className='centerbtn' onSubmit={handlesubmit}> 
-        <p>Precisez le motif de l avertissement</p>
+        <p>Precisez le motif de l activation</p>
         <textarea
         required onChange={handlemotif}
         rows="4" cols="40" name='description'

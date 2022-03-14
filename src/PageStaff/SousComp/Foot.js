@@ -14,18 +14,26 @@ export default function Foot() {
 		localStorage.removeItem('__jdkm__');
 		localStorage.removeItem('__jvqm__');
 		axiosInstance.defaults.headers['Authorization'] = null;
-		history.push('/connexion');
+    history.push('/');
+    window.location.reload()
+	
   }
  const handletechnique=()=>{
   history.push('/signaldeproblemetechnique')
  }
+const handleguide=()=>{
+  history.push('/guidestaff')
+ }
+
+
   return (
-    <footer>
+    <footer className='footstaf'>
       <Box
         px={{ xs: 3, sm: 10 }}
         py={{ xs: 5, sm: 10 }}
-        bgcolor="#000000"
-        color="white"
+       // bgcolor="#000000"
+        color="black"
+
       >
         <Container >
         <IonGrid>
@@ -36,7 +44,7 @@ export default function Foot() {
         </button>
         </IonCol>
         <IonCol size='4'>
-        <button className='btnfoot'>Guide</button>
+        <button className='btnfoot' onClick={handleguide}>Guide</button>
         </IonCol>
         <IonCol size='4'>
         <button className='btnfoot'

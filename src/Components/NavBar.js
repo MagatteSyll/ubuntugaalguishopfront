@@ -22,6 +22,8 @@ import axios from 'axios'
    const [notify, setnotify] = useState(false)
    const [notifications, setnotifications] = useState([])
    const  [badgenotify, setbadgenotify] = useState()
+   const [result,setresult]=useState([])
+   const [atrouve,setatrouve]=useState("")
   
   
 
@@ -35,6 +37,8 @@ import axios from 'axios'
      getnotification()
 
   },[])
+
+
   const getnotification=()=>{
     if(islog){
     axiosInstance
@@ -65,7 +69,7 @@ import axios from 'axios'
       history.push('/maboutique')
     }
     else{
-      setpopboutik(true)
+     history.push('/connexion') 
     }
   }
  const handlenotify=()=>{
@@ -87,7 +91,7 @@ import axios from 'axios'
       history.push('/historiquesdachat')
     }
     else{
-      setpopachat(true)
+      history.push('/connexion')
     }
   }
   const handlecommande=()=>{
@@ -95,7 +99,7 @@ import axios from 'axios'
       history.push('/mescommandes')
     }
     else{
-      setpopcommande(true)
+     history.push('/connexion')
     }
   }
   const handlepanier=()=>{
@@ -103,7 +107,7 @@ import axios from 'axios'
       history.push('/monpanier')
     }
     else{
-      setpopanier(true)
+      history.push('/connexion')
     }
   }
   const handleconnexion=()=>{
@@ -115,15 +119,37 @@ import axios from 'axios'
     
   }
   const handlecompte=()=>{
+    if(islog){
     history.push('/compte')
   }
+  else{
+    history.push('/connexion')
+  }
+  }
+
+ 
+const handlerecherche=e=>{
+  setatrouve(e.target.value)
+
+}
+  
+const gosearch=e=>{
+  if(atrouve===""|| atrouve===null||atrouve===undefined || atrouve.match(/^ *$/) !== null){
+    return;
+  }
+  history.push({
+  pathname: `/resultatrechercheproduit`,
+  search: '?search=' + atrouve,
+  })
+  window.location.reload();
+    }   
 
    return (
     <div>
       {isStaf?<NavStaff user={user} notifications={notifications} handlenotify={handlenotify}
        badgenotify={badgenotify} truncateString={truncateString} />:
     <Fragment>
-    { badgeload && notify?
+    { badgeload && notify ?
     <Fragment>
     <NavDesk islog={islog} handlevendre={handlevendre} handlesuivi={handlesuivi} handlaide={handlaide}
      handleachat={handleachat} handleboutique={handleboutique} handlecommande={handlecommande} popachat={popachat}
@@ -131,14 +157,15 @@ import axios from 'axios'
       handleconnexion={handleconnexion} handleinscription={handleinscription} handlepanier={handlepanier} 
        badgecart={badgecart} popanier={popanier} setpopanier={setpopanier} handlecompte={handlecompte} user={user}
         badgenotify={badgenotify} notifications={notifications} truncateString={truncateString}
-         handlenotify={handlenotify} />
+         handlenotify={handlenotify} result={result} handlerecherche={handlerecherche} gosearch={gosearch}/>
     <NavMobile islog={islog} handlevendre={handlevendre} handlesuivi={handlesuivi} handlaide={handlaide}
       handleachat={handleachat} handleboutique={handleboutique} handlecommande={handlecommande}
        popachat={popachat} popboutik={popboutik} popcommande={popcommande} popvente={popvente}
          handleconnexion={handleconnexion} handleinscription={handleinscription} 
         handlepanier={handlepanier} badgecart={badgecart} popanier={popanier} setpopanier={setpopanier} handlecompte={handlecompte}
         user={user} badgenotify={badgenotify} notifications={notifications} truncateString={truncateString}
-        handlenotify={handlenotify} />
+        handlenotify={handlenotify} result={result} handlerecherche={handlerecherche} 
+         gosearch={gosearch}/>
         </Fragment>:<IonLoading
           cssClass='my-custom-class'
           isOpen={showLoading}

@@ -9,10 +9,10 @@ import CommandeEnCoursMobile from '../Components/Mobile/CommandeEnCoursMobile'
 function CommandeEnCours() {
     const  [commande, setcommande] = useState([])
     const  [loaded, setloaded] = useState(false)
-    const [showLoading, setShowLoading] = useState(true);
+    const [showLoading, setShowLoading] = useState(true); 
 
     useEffect(()=>{
-        axiosInstance
+        axiosInstance 
         .get('produit/commandeencours/')
         .then(res=>{
             setcommande(res.data)
@@ -27,10 +27,10 @@ function CommandeEnCours() {
         <Fragment>
             {commande.length>0?
         <div className=" mt-3">
-            <h3>Commandes en cours</h3>
-         <CommandeEnCoursDesk commande={commande}/>
+        <h3 className='centerbtn'>Commandes en cours</h3>
+         <CommandeEnCoursDesk  commande={commande}/>
          <CommandeEnCoursMobile commande={commande}/>
-        </div>:<h1 className='centerbtn'>Vous n avez aucune commande en cours </h1>}
+        </div>:<h1 className='centerbtn'>Oups vous n avez aucune commande en cours </h1>}
         </Fragment>:
       <IonLoading
       cssClass='my-custom-class'
