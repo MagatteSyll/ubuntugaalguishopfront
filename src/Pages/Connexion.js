@@ -41,7 +41,8 @@ function Connexion({getuser}) {
 		}
         else{
 		axios
-			.post('http://127.0.0.1:8001/api/utilisateur/connexion/', {
+		.post('https://gaalguishopbackend.herokuapp.com/api/utilisateur/connexion/',{
+		//.post('http://127.0.0.1:8001/api/utilisateur/connexion/', {
 				phone: formData.phone,
 				password: formData.password,
 			})

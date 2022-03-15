@@ -31,7 +31,8 @@ function Accueil({isstaf,user,islog}) {
     }
     const getoccasion=()=>{
         axios
-        .get('http://127.0.0.1:8001/api/produit/produitoccasion/')
+        //.get('http://127.0.0.1:8001/api/produit/produitoccasion/')
+        .get('https://gaalguishopbackend.herokuapp.com/api/produit/produitoccasion/')
         .then(res=>{
             setoccas(res.data)
             
@@ -41,7 +42,8 @@ function Accueil({isstaf,user,islog}) {
     }
     const getvendeur=()=>{
         axios
-        .get('http://127.0.0.1:8001/api/produit/nosvendeur/')
+        .get('https://gaalguishopbackend.herokuapp.com/api/produit/nosvendeur/')
+       // .get('http://127.0.0.1:8001/api/produit/nosvendeur/')
         .then((res=>{
            // console.log(res.data)
             setvendeur(res.data)
@@ -51,7 +53,8 @@ function Accueil({isstaf,user,islog}) {
     }
     const getcategory=()=>{
         axios
-        .get('http://127.0.0.1:8001/api/produit/category/')
+        .get('https://gaalguishopbackend.herokuapp.com/api/produit/category/')
+       // .get('http://127.0.0.1:8001/api/produit/category/')
         .then(res=>{
             setcategory(res.data)
             setcatload(true)

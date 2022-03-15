@@ -47,7 +47,8 @@ function BoutiqueVueClient(props) {
     
     const getproduitactif=()=>{
       axios
-      .post('http://127.0.0.1:8001/api/produit/produitactif/',{id:id})
+      .post('https://gaalguishopbackend.herokuapp.com/api/produit/produitactif/',{id:id})
+      //.post('http://127.0.0.1:8001/api/produit/produitactif/',{id:id})
       .then(res=>{
           console.log(res.data.items)
           setproduit(res.data)  
@@ -57,7 +58,8 @@ function BoutiqueVueClient(props) {
     }
   const getproduitvendu=()=>{
     axios
-    .post('http://127.0.0.1:8001/api/produit/produitvenduvuclient/',{id:id})
+    .post('https://gaalguishopbackend.herokuapp.com/api/produit/produitvenduvuclient/',{id:id})
+   // .post('http://127.0.0.1:8001/api/produit/produitvenduvuclient/',{id:id})
     .then(res=>{
       setproduitvendu(res.data)
       setvendload(true)
@@ -65,7 +67,8 @@ function BoutiqueVueClient(props) {
   }
 const getboutique=()=>{
   axios
-  .post('http://127.0.0.1:8001/api/produit/profilboutiquevuclient/',{id:id})
+   .post('https://gaalguishopbackend.herokuapp.com/api/produit/profilboutiquevuclient/',{id:id})
+  //.post('http://127.0.0.1:8001/api/produit/profilboutiquevuclient/',{id:id})
   .then(res=>{
     setprofil(res.data)
     setprofiload(true)

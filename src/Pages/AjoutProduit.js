@@ -94,7 +94,8 @@ export default function AjoutProduit() {
   
   useEffect(() => {
       axios
-      .get('http://127.0.0.1:8001/api/produit/category/')
+       .get('https://gaalguishopbackend.herokuapp.com/api/produit/category/')
+      //.get('http://127.0.0.1:8001/api/produit/category/')
       .then(res=>{
           //console.log(res.data)
           setcat(res.data)
@@ -104,7 +105,8 @@ export default function AjoutProduit() {
   }, [])
   useEffect(()=>{
     axios
-      .get('http://127.0.0.1:8001/api/produit/region/')
+     .get('https://gaalguishopbackend.herokuapp.com/api/produit/region/')
+      //.get('http://127.0.0.1:8001/api/produit/region/')
       .then(res=>{
           //console.log(res.data)
           setregion(res.data)
