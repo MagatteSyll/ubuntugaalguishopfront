@@ -14,28 +14,13 @@ function ProduitSingleCategory(props) {
     let category=props.match.params.slug
     const handlebadge=props.handlebadge
     const [showLoading, setShowLoading] = useState(true);
-
-    
     const isStaf=props.isStaf
    const  islog=props.islog
    const history=useHistory()
     
-    useEffect(()=>{
-        axiosInstance
-        .get('utilisateur/getuser/')
-        .then(res=>{
-            setuser(res.data)
-        })
-    },[])
+  
    
-    useEffect(() => {
-        axiosInstance
-        .get('utilisateur/isauthenticated/')
-        .then(res=>{
-            //setislogged(res.data)
-           // console.log(res.data)
-        })
-     }, [])
+  
 
     useEffect(()=>{
         
@@ -46,7 +31,7 @@ function ProduitSingleCategory(props) {
     
 
     const fetchdata=()=>{
-        axiosInstance
+        axios
         .post('produit/produitpercategory/',{category:category})
         .then(res=>{
            // console.log(res.data)
@@ -58,42 +43,15 @@ function ProduitSingleCategory(props) {
 
     }
 
-    const  HandleAddCart = id =>{
-        axiosInstance
-      .post("produit/addcart/",{id})
-       .then(res=>{
-       // console.log(res.data)
-       handlebadge()
-     
-
-        
-        })
-      .catch(err=>{
-        return;
-      })
-    }
-
-    
-    const handlenonlog=()=>{
-      history.push('/connexion')
-    }
-   
-    const handledetail=(slug,nom)=>{
-      history.push(`/detail/${slug}/${nom}`)
-    }
-
+  
     return (
         <div>
           {load?
         <div>
-      <ProduitUneCategorieDesk isStaf={isStaf} islog={islog} HandleAddCart={HandleAddCart} 
-      truncateString={truncateString} handlenonlog={handlenonlog} 
-      load={load} user={user}
-      fetchdata={fetchdata} produit={produit}  handledetail={handledetail}  />
-      <ProduitUneCategorieMobile isStaf={isStaf} islog={islog} HandleAddCart={HandleAddCart} 
-      truncateString={truncateString} handlenonlog={handlenonlog} 
-      load={load} user={user}
-      fetchdata={fetchdata} produit={produit}  handledetail={handledetail}  />
+      <ProduitUneCategorieDesk  
+      truncateString={truncateString} produit={produit}  />
+      <ProduitUneCategorieMobile  
+      truncateString={truncateString} produit={produit} />
       </div>:
         <IonLoading
         cssClass='my-custom-class'

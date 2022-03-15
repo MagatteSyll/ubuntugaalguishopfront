@@ -14,18 +14,7 @@ function ProduitUneCategorieDesk({islog,HandleAddCart,truncateString,
   return(
     <div className='desk'>
     <Container>
-    hey
-  </Container>
-  </div>
-  
-    );
-}
-
-export default ProduitUneCategorieDesk;
-
-
-/*
- <IonGrid>
+    <IonGrid>
     <IonRow>
   {produit.length>0 ? produit.map(pi=>   
    <IonCol size='4'>
@@ -51,4 +40,10 @@ export default ProduitUneCategorieDesk;
         </IonRow>
     </IonCol>):<h1 className='centerbtn redstyle'>Oups aucun produit dans cette categorie</h1>}
   </IonRow> </IonGrid>
-  */
+  </Container>
+  </div>
+  
+    );
+}
+
+export default ProduitUneCategorieDesk;
