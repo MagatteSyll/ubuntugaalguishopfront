@@ -44,7 +44,7 @@ import axios from 'axios'
     axiosInstance
     .get('utilisateur/getnotification/')
     .then(res=>{
-      console.log(res.data)
+      //console.log(res.data)
       setnotifications(res.data.notifcationall)
      setbadgenotify(res.data.notifynolu.length)
       setnotify(true)
