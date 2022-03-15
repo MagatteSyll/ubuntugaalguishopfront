@@ -21,7 +21,7 @@ function BoutiqueVueDesk({profil,seg,handleproduitactif,handlevendu,
       <IonGrid>
         <IonRow>
           <IonCol size='6'>
-          <Image  src={`http://127.0.0.1:8001${profil.logo}`} roundedCircle  className='picprofil'/>
+          <Image  src={`https://gaalguishopbackend.herokuapp.com${profil.logo}`} roundedCircle  className='picprofil'/>
           </IonCol>
           <IonCol size='6'> 
             <IonRow>
@@ -83,7 +83,7 @@ function BoutiqueVueDesk({profil,seg,handleproduitactif,handlevendu,
   { produitvendu.length>0 ? produitvendu.map(pi=>
     <IonCol size='3' key={pi.id}>
      <div className='singleproduit'>
-      <img src={`http://127.0.0.1:8001${pi.thumbnail}`} alt="" className="imgboutiquedesk"  />
+      <img src={`https://gaalguishopbackend.herokuapp.com${pi.thumbnail}`} alt="" className="imgboutiquedesk"  />
       <Link className='linkpanier' to={`/detail/${pi.slug}/${pi.nom}`}>
        <p className='centerbtn'> <strong >{pi.nom}</strong></p></Link>
        <p className='centerbtn'>
@@ -101,7 +101,7 @@ function BoutiqueVueDesk({profil,seg,handleproduitactif,handlevendu,
   <IonRow>
   { produit.length>0 ? produit.map(pi=>
     <IonCol size='3' key={pi.id}>
-    <img src={`http://127.0.0.1:8001${pi.thumbnail}`} alt="" className="imgboutiquedesk"  />
+    <img src={`https://gaalguishopbackend.herokuapp.com${pi.thumbnail}`} alt="" className="imgboutiquedesk"  />
      <Link className='linkpanier' to={`/detail/${pi.slug}/${pi.nom}`}>
     <p className='centerbtn'> <strong >{pi.nom}</strong> </p>
       </Link>

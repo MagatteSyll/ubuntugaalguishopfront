@@ -38,7 +38,7 @@ setimage({...image,image:image,size:size,color:color,quantite:qte,id:lid,
      
     <IonCol size='12' className='container' >
     <h3>{produit.nom}</h3><br/>
-    <Image className='imgdetailmobile' src={`http://127.0.0.1:8001${image.image}`} />
+    <Image className='imgdetailmobile' src={`https://gaalguishopbackend.herokuapp.com${image.image}`} />
    
     <div className='mt-2 container'>
     <IonSegment className='detailsegment'>
@@ -77,7 +77,7 @@ setimage({...image,image:image,size:size,color:color,quantite:qte,id:lid,
    <h3 >{produit.nom}</h3><br/>
   <IonCol size='12' className='container' >
     <div>
-    <Image className='imgdetailmobile' src={`http://127.0.0.1:8001${image.image}`} />
+    <Image className='imgdetailmobile' src={`https://gaalguishopbackend.herokuapp.com${image.image}`} />
     </div>
     <div className='mt-2'>
     <IonSegment className='detailsegment'>

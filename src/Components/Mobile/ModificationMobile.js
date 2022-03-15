@@ -211,7 +211,7 @@ function ModificationMobile({imgref,handledata,handleundata,produit,handlecat,
            <>
            {produitimage.map(pi=>
           <div className='col-md-4'>
-          <img alt='' src={`http://127.0.0.1:8001${pi.image}`} className='imgmodifunique'/>
+          <img alt='' src={`https://gaalguishopbackend.herokuapp.com${pi.image}`} className='imgmodifunique'/>
           <p> <button className='btndrop' onClick={()=>handledelete(pi.id)}>
            <IonIcon  className='redstyle' icon={trashOutline}/>
            </button></p>

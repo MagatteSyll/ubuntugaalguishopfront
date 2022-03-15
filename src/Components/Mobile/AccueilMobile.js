@@ -40,7 +40,7 @@ function MeilleurVendeur({user,vendeur,islog}) {
               <SwiperSlide>
                 <Link className='nodecolink' to={`/boutique/${v.id}/${v.user.prenom+""+v.user.nom}`}>
                   <p className='pnommeilleurvendeur'>{v.user.prenom} {v.user.nom}</p> 
-             <img src={`http://127.0.0.1:8001${v.logo}`} alt='' className='imgpopmobile'/>
+             <img src={`https://gaalguishopbackend.herokuapp.com${v.logo}`} alt='' className='imgpopmobile'/>
              </Link> <br/><br/>
   
             {islog?
@@ -89,7 +89,7 @@ function MeilleurVendeur({user,vendeur,islog}) {
           {category.map(cat=>
             <Fragment>
             <p>{cat.category}</p>
-            <img src={`http://127.0.0.1:8001${cat.image}`} alt="" className='imgcategory'  />
+            <img src={`https://gaalguishopbackend.herokuapp.com${cat.image}`} alt="" className='imgcategory'  />
             <p> <Link to={`/category/${cat.category}`}>Voir plus </Link> </p>  
             </Fragment> )}
             
@@ -112,7 +112,7 @@ function Occasion({occas}) {
             >
             {occas.map(oc=>
                  <SwiperSlide>
-                 <img src={`http://127.0.0.1:8001${oc.thumbnail}`} alt='' className='imgvendeur'/>
+                 <img src={`https://gaalguishopbackend.herokuapp.com${oc.thumbnail}`} alt='' className='imgvendeur'/>
                   <Link to={`detail/${oc.slug}/${oc.nom}`} className='linkpanier'>  <p>
                     {oc.nom}  <IonText style={{color:'red'}}>{oc.prix}</IonText> CFA
                     </p></Link>
@@ -134,7 +134,7 @@ function Populaire({populaire}) {
         <IonRow>
         {populaire.map(cat=>
             <IonCol size='4'>
-             <img src={`http://127.0.0.1:8001${cat.image}`} alt="" 
+             <img src={`https://gaalguishopbackend.herokuapp.com${cat.image}`} alt="" 
           key={cat.id} className='imgvendeur' /> 
           <p style={{marginLeft:'5px'}}>{cat.category} </p>
             </IonCol> )}

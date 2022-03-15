@@ -21,7 +21,7 @@ function ProduitUneCategorieDesk({islog,HandleAddCart,truncateString,
   
           <IonRow>
          <IonCol size='6'>
-        <img src={`http://127.0.0.1:8001${pi.thumbnail}`} alt="" className="imgcategory" />
+        <img src={`https://gaalguishopbackend.herokuapp.com${pi.thumbnail}`} alt="" className="imgcategory" />
         <p>    
        <Link className='linkpanier' 
          to={`/boutique/${pi.boutique.id}/${pi.vendeur.prenom+""+pi.vendeur.nom}`}>

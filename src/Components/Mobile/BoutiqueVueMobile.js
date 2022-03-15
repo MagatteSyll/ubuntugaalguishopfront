@@ -19,7 +19,7 @@ function BoutiqueVueMobile({profil,seg,handleproduitactif,handlevendu,
     <IonGrid> 
       <IonRow>
         <IonCol size='4'>
-        <Image  src={`http://127.0.0.1:8001${profil.logo}`} roundedCircle  className='picprofilmobile'/>
+        <Image  src={`https://gaalguishopbackend.herokuapp.com${profil.logo}`} roundedCircle  className='picprofilmobile'/>
         </IonCol>
         <IonCol size='8'>
        <IonRow>
@@ -77,7 +77,7 @@ function BoutiqueVueMobile({profil,seg,handleproduitactif,handlevendu,
    { produit.length>0 ? produit.map(pi=>
     <IonCol size='4' key={pi.id}> 
        <div className='singleproduit' > 
-      <img src={`http://127.0.0.1:8001${pi.thumbnail}`} alt="" className="imgboutiquemobile"  />
+      <img src={`https://gaalguishopbackend.herokuapp.com${pi.thumbnail}`} alt="" className="imgboutiquemobile"  />
      <p >  <Link className='linkpanier' to={`/detail/${pi.slug}/${pi.nom}`}>
        <strong >{pi.nom}</strong>
       </Link> </p>
@@ -98,7 +98,7 @@ function BoutiqueVueMobile({profil,seg,handleproduitactif,handlevendu,
     {produitvendu.length>0 ? produitvendu.map(pi=>
     <IonCol size='4' key={pi.id}>
       <div className='singleproduit'>
-      <img src={`http://127.0.0.1:8001${pi.thumbnail}`} alt="" className="imgboutiquemobile"  />
+      <img src={`https://gaalguishopbackend.herokuapp.com${pi.thumbnail}`} alt="" className="imgboutiquemobile"  />
       <Link className='linkpanier' to={`/detail/${pi.slug}/${pi.nom}`}>
        <p className='centerbtn'> <strong >{pi.nom}</strong></p></Link>
 

@@ -29,7 +29,7 @@ function CommandeDesk({produit,handlesubmit,handledta,handladress,calculer,livra
               </div>:null}
               </IonCol>
               <IonCol size='5'>
-            <img src={`http://127.0.0.1:8001${produit.imageproduct.image}`} alt='' className='imgajout' />
+            <img src={`https://gaalguishopbackend.herokuapp.com${produit.imageproduct.image}`} alt='' className='imgajout' />
              </IonCol>
              </IonRow>
               </IonCard>
@@ -79,7 +79,7 @@ function CommandeDesk({produit,handlesubmit,handledta,handladress,calculer,livra
                 </div>:null}
                 </IonCol>
                 <IonCol size='5'>
-                <img src={`http://127.0.0.1:8001${produit.product.thumbnail}`} alt='' className='imgajout' />
+                <img src={`https://gaalguishopbackend.herokuapp.com${produit.product.thumbnail}`} alt='' className='imgajout' />
                 </IonCol>
                   </IonRow>
               </IonCard>

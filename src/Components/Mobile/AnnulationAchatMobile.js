@@ -9,7 +9,7 @@ function AnnulationAchatMobile({notification}) {
         {notification.commande.produitcommande.product===null?
         <IonRow>
         <IonCol size='12' className='centerbtn'>
-       <img src={`http://127.0.0.1:8001${notification.commande.produitcommande.imageproduct.image}`}
+       <img src={`https://gaalguishopbackend.herokuapp.com${notification.commande.produitcommande.imageproduct.image}`}
          alt='' className='imgannule' />
         </IonCol>
             <IonCol size='10' className='centerbtn'>
@@ -34,7 +34,7 @@ function AnnulationAchatMobile({notification}) {
         </IonRow>:
          <IonRow>
         <IonCol size='12'>
-       <img src={`http://127.0.0.1:8001${notification.commande.produitcommande.product.thumbnail}`}
+       <img src={`https://gaalguishopbackend.herokuapp.com${notification.commande.produitcommande.product.thumbnail}`}
          alt='' className='imgannule' />
         </IonCol>
             <IonCol size='10'>

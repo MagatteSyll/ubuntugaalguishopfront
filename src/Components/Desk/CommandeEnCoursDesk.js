@@ -57,7 +57,7 @@ function CommandeEnCoursDesk({commande}) {
      </p> 
      </IonCol>
     <IonCol size='6'>
-    <img src={`http://127.0.0.1:8001${ach.produitcommande.imageproduct.image}`} alt="" 
+    <img src={`https://gaalguishopbackend.herokuapp.com${ach.produitcommande.imageproduct.image}`} alt="" 
     className="imgcom" />
     <p>Etat de la commande <strong>{ach.statut_commande}</strong></p>
     </IonCol>
@@ -110,7 +110,7 @@ function CommandeEnCoursDesk({commande}) {
 
   </IonCol> 
     <IonCol size='6'>
-   <img src={`http://127.0.0.1:8001${ach.produitcommande.product.thumbnail}`} alt="" 
+   <img src={`https://gaalguishopbackend.herokuapp.com${ach.produitcommande.product.thumbnail}`} alt="" 
     className="imgcom"/>
   <p>Etat de la commande <strong>{ach.statut_commande}</strong></p>
    </IonCol >

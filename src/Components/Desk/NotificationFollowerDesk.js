@@ -21,7 +21,7 @@ function NotificationFollowerDesk({notification,handlecart}) {
                      </Link>
                      </IonCol>
                      <IonCol size='5'>
-                     <img src={`http://127.0.0.1:8001${notification.produit.thumbnail}`}
+                     <img src={`https://gaalguishopbackend.herokuapp.com${notification.produit.thumbnail}`}
                       alt='' className='imgajout' />
                      </IonCol>
                  </IonRow>

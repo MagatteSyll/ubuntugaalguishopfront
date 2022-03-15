@@ -26,7 +26,7 @@ function PanierMobile({cartproduit, handleplus, handleminus,handleremove,truncat
       <p>{truncateString(cart.imageproduct.produit.description,50)}</p></Link>
       </IonCol>
        <IonCol size='4'>
-      <img src={`http://127.0.0.1:8001${cart.imageproduct.image}`} alt='' className='imgpaniermobile' />
+      <img src={`https://gaalguishopbackend.herokuapp.com${cart.imageproduct.image}`} alt='' className='imgpaniermobile' />
       </IonCol>
       <IonCol size='4'>
       {cart.imageproduct.active?
@@ -72,7 +72,7 @@ function PanierMobile({cartproduit, handleplus, handleminus,handleremove,truncat
       <p>{truncateString(cart.product.description,50)}</p></Link>
    </IonCol>
     <IonCol size='4'>
-    <img src={`http://127.0.0.1:8001${cart.product.thumbnail}`} alt='' className='imgpaniermobile' />
+    <img src={`https://gaalguishopbackend.herokuapp.com${cart.product.thumbnail}`} alt='' className='imgpaniermobile' />
     </IonCol>
     <IonCol size='4'>
      {cart.product.active?
@@ -121,61 +121,3 @@ function PanierMobile({cartproduit, handleplus, handleminus,handleremove,truncat
 
 export default PanierMobile;
 
-/*
- <IonCol size='6'>
-             <p>{pi.product.nom}</p>
-             <p>quantite:{pi.quantity}</p>
-             <p>prix unitaire: <IonText className='redstyle'>{pi.product.prix}</IonText> CFA</p>
-             <p>sous total:<IonText className='redstyle'> {pi.subtotal}</IonText>  CFA CFA</p>
-             <p className='mt-3'><Button variant="outline-warning" onClick={()=>handleplus(pi.product.id)}><AddCircleIcon/></Button>
-            <Button variant="outline-info" onClick={()=>handleminus(pi.id)}><RemoveIcon/></Button>
-            <Button  variant="outline-danger" edge='end' onClick={()=>handleremove(pi.id)}><DeleteIcon/></Button>
-            </p>
-             </IonCol>
-             <IonCol size='4'>
-             <p> <Link className='linkpanier' to={`/detail/${pi.product.slug}/${pi.product.nom}`}>
-              {truncateString(pi.product.description,40)}</Link>  
-                </p>
-             </IonCol>
-             <IonCol size='2'>
-             {pi.product.active?
-             <p className='centerbtn'>
-              <Button  className='btncommandedesk' variant="dark" edge='end' 
-              onClick={()=>handlecommande(pi)}>Commander</Button></p>:
-              <IonText style={{color:'red'}}>Produit inactif!</IonText>}
-             </IonCol>
-
-
-
-   {cartproduit.map(pi=>
-             <IonCard className='cartpaniermobile'>
-            <IonRow>
-             <IonCol size='8'>
-             <img src={`http://127.0.0.1:8001${pi.product.thumbnail}`} alt='' className='imgpaniermobile' />
-             </IonCol>
-             <IonCol size='4'>
-             <p> <Link className='linkpanier' to={`/detail/${pi.product.slug}/${pi.product.nom}`}>
-              {truncateString(pi.product.description,40)}</Link>  
-                </p>
-            
-             </IonCol>
-             <IonCol size='12' className='centerbtn'>
-             <p>{pi.product.nom}</p>
-             <p>quantite:{pi.quantity}</p>
-             <p>prix unitaire: <IonText className='redstyle'>{pi.product.prix}</IonText> CFA</p>
-             <p>sous total:<IonText className='redstyle'> {pi.subtotal}</IonText>  CFA</p>
-             <p className='mt-3'><Button variant="outline-warning" onClick={()=>handleplus(pi.product.id)}><AddCircleIcon/></Button>
-            <Button variant="outline-info" onClick={()=>handleminus(pi.id)}><RemoveIcon/></Button>
-            <Button  variant="outline-danger" edge='end' onClick={()=>handleremove(pi.id)}><DeleteIcon/></Button>
-            </p>
-            {pi.product.active?
-             <p >
-              <Button  variant="dark" edge='start' 
-              onClick={()=>handlecommande(pi.id ,pi.product.nom,pi.product.slug)}>Commander</Button><br/>
-              <IonText className='redstyle'>{pi.product.quantite} disponibles</IonText></p>:
-              <IonText className='redstyle'>Produit inactif!</IonText>}
-             </IonCol>
-             </IonRow>
-            </IonCard>)}
-             
-*/

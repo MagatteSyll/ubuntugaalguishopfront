@@ -29,7 +29,7 @@ function AnnulationAchatDesk({notification}) {
                      </strong> </p>
                      </IonCol>
                      <IonCol size='6'>
-                     <img src={`http://127.0.0.1:8001${notification.commande.produitcommande.imageproduct.image}`}
+                     <img src={`https://gaalguishopbackend.herokuapp.com${notification.commande.produitcommande.imageproduct.image}`}
                       alt='' className='imgajout' />
                      </IonCol>
                  </IonRow>
@@ -56,7 +56,7 @@ function AnnulationAchatDesk({notification}) {
                      </strong> </p>
                      </IonCol>
                      <IonCol size='6'>
-                     <img src={`http://127.0.0.1:8001${notification.commande.produitcommande.product.thumbnail}`}
+                     <img src={`https://gaalguishopbackend.herokuapp.com${notification.commande.produitcommande.product.thumbnail}`}
                       alt='' className='imgajout' />
                      </IonCol>
                  </IonRow>

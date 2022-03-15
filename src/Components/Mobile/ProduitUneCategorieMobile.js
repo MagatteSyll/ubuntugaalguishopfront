@@ -23,7 +23,7 @@ function ProduitUneCategorieMobile({islog,HandleAddCart,truncateString,
        <IonCard className='cartcategorymobile'>
           <IonRow>
          <IonCol size='12' className='container'>
-        <img src={`http://127.0.0.1:8001${pi.thumbnail}`} alt="" className="imgcategorymobile" />
+        <img src={`https://gaalguishopbackend.herokuapp.com${pi.thumbnail}`} alt="" className="imgcategorymobile" />
        </IonCol>
        <IonCol size='12'>
        <Link className='linkpanier' to={`/detail/${produit.slug}/${produit.nom}`}> 

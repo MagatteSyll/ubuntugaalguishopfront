@@ -14,7 +14,7 @@ return(
     <IonCol size='4'>
     {ach.produitcommande.product===null?
     <div>
-    <img src={`http://127.0.0.1:8001${ach.produitcommande.imageproduct.image}`} alt="" 
+    <img src={`https://gaalguishopbackend.herokuapp.com${ach.produitcommande.imageproduct.image}`} alt="" 
     className="imgboutiquedesk"/>
     <Link className='linkpanier'
   to={`/detail/${ach.produitcommande.imageproduct.produit.slug}/${ach.produitcommande.imageproduct.produit.nom}`}>
@@ -26,7 +26,7 @@ return(
      </p> 
     </div>:
     <div>
-   <img src={`http://127.0.0.1:8001${ach.produitcommande.product.thumbnail}`} alt="" 
+   <img src={`https://gaalguishopbackend.herokuapp.com${ach.produitcommande.product.thumbnail}`} alt="" 
     className="imgboutiquedesk"/>
     <Link className='linkpanier'
   to={`/detail/${ach.produitcommande.product.slug}/${ach.produitcommande.product.nom}`}>

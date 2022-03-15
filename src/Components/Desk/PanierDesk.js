@@ -44,7 +44,7 @@ function PanierDesk({cartproduit, handleplus, handleminus,handleremove,truncateS
       </p>
       </IonCol>
        <IonCol size='4'>
-      <img src={`http://127.0.0.1:8001${cart.imageproduct.image}`} alt='' className='imgpanierdesk' />
+      <img src={`https://gaalguishopbackend.herokuapp.com${cart.imageproduct.image}`} alt='' className='imgpanierdesk' />
       </IonCol>
       <IonCol size='4'>
       {cart.imageproduct.active?
@@ -88,7 +88,7 @@ function PanierDesk({cartproduit, handleplus, handleminus,handleremove,truncateS
       </p>
    </IonCol>
     <IonCol size='4'>
-    <img src={`http://127.0.0.1:8001${cart.product.thumbnail}`} alt='' className='imgpanierdesk' />
+    <img src={`https://gaalguishopbackend.herokuapp.com${cart.product.thumbnail}`} alt='' className='imgpanierdesk' />
     </IonCol>
     <IonCol size='4'>
      {cart.product.active?
