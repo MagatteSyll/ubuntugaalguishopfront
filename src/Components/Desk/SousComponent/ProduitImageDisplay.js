@@ -44,7 +44,7 @@ setimage({...image,image:image,size:size,color:color,quantite:qte,id:lid,
     <IonSegment className='detailsegment'>
         {produitimage.map(pi=>
         <button className='btndrop btndetail' onClick={()=>handleclick(pi.id)}>
-        <Image className='imgbtndetail' src={`http://127.0.0.1:8001${pi.image}`} />
+        <Image className='imgbtndetail' src={`https://gaalguishopbackend.herokuapp.com${pi.image}`} />
         </button>)}
     </IonSegment>
     </div>
@@ -83,7 +83,7 @@ setimage({...image,image:image,size:size,color:color,quantite:qte,id:lid,
     <IonSegment className='detailsegment'>
         {produitimage.map(pi=>
         <button className='btndrop btndetail' onClick={()=>handleclick(pi.id)}>
-        <Image className='imgbtndetail' src={`http://127.0.0.1:8001${pi.image}`} />
+        <Image className='imgbtndetail' src={`https://gaalguishopbackend.herokuapp.com${pi.image}`} />
         </button>)}
     </IonSegment>
     </div>

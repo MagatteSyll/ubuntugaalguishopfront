@@ -23,7 +23,7 @@ function BoutiqueVendeurMobile({produit,produitvendu, botique, modal,  seg,
        <IonRow> 
         <IonCol size='4' >
         <button onClick={handleclick} className='btndrop m-0' > 
-        <Image  src={`http://127.0.0.1:8001${botique.logo}`} roundedCircle className='imgprofile'/>
+        <Image  src={`https://gaalguishopbackend.herokuapp.com${botique.logo}`} roundedCircle className='imgprofile'/>
         <CameraAltIcon/></button><br/><br/>
         <input type='file' accept='image/*' ref={iref} className='filimg' onChange={handlefile} />
         </IonCol>

@@ -14,14 +14,25 @@ function ProduitUneCategorieDesk({islog,HandleAddCart,truncateString,
   return(
     <div className='desk'>
     <Container>
-    <IonGrid>
+    hey
+  </Container>
+  </div>
+  
+    );
+}
+
+export default ProduitUneCategorieDesk;
+
+
+/*
+ <IonGrid>
     <IonRow>
   {produit.length>0 ? produit.map(pi=>   
    <IonCol size='4'>
   
           <IonRow>
          <IonCol size='6'>
-        <img src={`https://gaalguishopbackend.herokuapp.com${pi.thumbnail}`} alt="" className="imgcategory" />
+        <img src={pi.thumbnail} alt="" className="imgcategory" />
         <p>    
        <Link className='linkpanier' 
          to={`/boutique/${pi.boutique.id}/${pi.vendeur.prenom+""+pi.vendeur.nom}`}>
@@ -40,10 +51,4 @@ function ProduitUneCategorieDesk({islog,HandleAddCart,truncateString,
         </IonRow>
     </IonCol>):<h1 className='centerbtn redstyle'>Oups aucun produit dans cette categorie</h1>}
   </IonRow> </IonGrid>
-  </Container>
-  </div>
-  
-    );
-}
-
-export default ProduitUneCategorieDesk;
+  */
