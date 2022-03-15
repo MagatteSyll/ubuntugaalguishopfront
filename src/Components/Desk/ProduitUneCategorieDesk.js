@@ -8,8 +8,7 @@ import { IonRow,IonGrid,IonCol, } from '@ionic/react'
 
 
 
-function ProduitUneCategorieDesk({islog,HandleAddCart,truncateString, 
-    handlenonlog,user, produit}){ 
+function ProduitUneCategorieDesk({ produit}){ 
    
   return(
     <div className='desk'>
@@ -21,7 +20,7 @@ function ProduitUneCategorieDesk({islog,HandleAddCart,truncateString,
   
           <IonRow>
          <IonCol size='6'>
-        <img src={pi.thumbnail} alt="" className="imgcategory" />
+        <img src={`https://gaalguishopbackend.herokuapp.com${pi.thumbnail}`} alt="" className="imgcategory" />
         <p>    
        <Link className='linkpanier' 
          to={`/boutique/${pi.boutique.id}/${pi.vendeur.prenom+""+pi.vendeur.nom}`}>

@@ -92,7 +92,7 @@ useEffect(()=>{
      getstaf()
   },[])
 
-useEffect(()=>{
+/*useEffect(()=>{
  axiosInstance
  .get('utilisateur/getchannel/')
  .then(res=>{
@@ -116,6 +116,7 @@ useEffect(()=>{
 return;
 })
 })
+*/
 
  const getnotifications=()=>{
       axiosInstance
