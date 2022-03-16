@@ -109,7 +109,7 @@ function BoutiqueVueMobile({profil,seg,handleproduitactif,handlevendu,
  
        </div>
       </IonCol>
-      ):<h1 className='centerbtn'>Aucun produit actif </h1>}
+      ):<h1 className='centerbtn'>Aucun produit vendu </h1>}
      </IonRow>
    </IonGrid>
     </div>

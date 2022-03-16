@@ -9,17 +9,17 @@ function AjoutMobile({picload,disp,imgref,handleImageSelect,handleref,handlesubm
    handluniquepic, handlevaripic, modifvaripic,modifuniquepic,picvariref ,picuniqueref,removunique,
    removevari,devise,handledevise,handledevisevari}) {
   return(
-       <div className='mobile'>
+       <div className='mobile'> 
          <IonSegment value= {seg}> 
         <IonGrid>
           <IonRow>
             <IonCol size='6'>
-            <IonSegmentButton className='segmentajout' value='sansvariation' onClick={handlenonvaria}>
+            <IonSegmentButton className='segboutiquevendeur' value='sansvariation' onClick={handlenonvaria}>
           <p>Modèle unique</p>
         </IonSegmentButton>
             </IonCol>
             <IonCol size='6'>
-            <IonSegmentButton className='segmentajout' value='avecvariation' onClick={handlevaria}>
+            <IonSegmentButton className='segbtnboutique' value='avecvariation' onClick={handlevaria}>
             <p>Modèle varié</p>
            </IonSegmentButton>
           </IonCol>

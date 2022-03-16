@@ -98,7 +98,7 @@ function BoutiqueVendeurMobile({produit,produitvendu, botique, modal,  seg,
  
        </div>
       </IonCol>
-      ):<h1 className='centerbtn'>Aucun produit actif </h1>}
+      ):<h1 className='centerbtn'>Aucun produit vendu </h1>}
      </IonRow>
    </IonGrid>
     </div>
