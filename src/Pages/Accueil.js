@@ -1,7 +1,6 @@
 import React, { Fragment,useState,useEffect } from 'react'
 import AccueilDesk from '../Components/Desk/AccueilDesk'
 import AccueilMobile from '../Components/Mobile/AccueilMobile'
-import axios from 'axios'
 import {IonLoading} from '@ionic/react'
 import axiosInstance from '../axios'
 
@@ -30,9 +29,8 @@ function Accueil({isstaf,user,islog}) {
         //
     }
     const getoccasion=()=>{
-        axios
-        //.get('http://127.0.0.1:8001/api/produit/produitoccasion/')
-        .get('https://gaalguishopbackend.herokuapp.com/api/produit/produitoccasion/')
+        axiosInstance
+        .get('produit/produitoccasion/')
         .then(res=>{
             setoccas(res.data)
             
@@ -41,24 +39,22 @@ function Accueil({isstaf,user,islog}) {
 
     }
     const getvendeur=()=>{
-        axios
-        .get('https://gaalguishopbackend.herokuapp.com/api/produit/nosvendeur/')
-       // .get('http://127.0.0.1:8001/api/produit/nosvendeur/')
+        axiosInstance
+        .get('produit/nosvendeur/')
         .then((res=>{
-           // console.log(res.data)
+            console.log(res.data)
             setvendeur(res.data)
             setvendload(true)
             
         }))
     }
     const getcategory=()=>{
-        axios
-        .get('https://gaalguishopbackend.herokuapp.com/api/produit/category/')
-       // .get('http://127.0.0.1:8001/api/produit/category/')
+        axiosInstance
+        .get('produit/category/')
         .then(res=>{
             setcategory(res.data)
             setcatload(true)
-          //   console.log(res.data)
+           // console.log(res.data)
         })
     }
 
@@ -67,7 +63,7 @@ function Accueil({isstaf,user,islog}) {
     return ( 
        <div>
         <Fragment>
-        {catload &&vendload &&occasload?
+        {catload &&vendload && occasload?
        
         <>
         <AccueilDesk user={user} vendeur={vendeur} category={category} occas={occas}

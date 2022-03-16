@@ -25,9 +25,8 @@ function ConfirmationPhoneNumber(props){
         getuser()
     },[])
     const getuser=()=>{
-      axios
-      .post('https://gaalguishopbackend.herokuapp.com/api/utilisateur/getnewuser/',{id:id})
-      //.post('http://127.0.0.1:8001/api/utilisateur/getnewuser/',{id:id})
+      axiosInstance
+      .post('utilisateur/getnewuser/',{id:id})
       .then(res=>{
         setuser(res.data)
         setload(true)
@@ -47,8 +46,8 @@ const verifier = () => toast.error("Code invalide!",{
   const handleconfir=e=>{
     e.preventDefault()
     console.log(code)
-   axios
-   .post('https://gaalguishopbackend.herokuapp.com/api/utilisateur/phonecodeconfirmation/',{code:code,code_id:code_id,id:id})
+   axiosInstance
+   .post('utilisateur/phonecodeconfirmation/',{code:code,code_id:code_id,id:id})
    //.post('http://127.0.0.1:8001/api/utilisateur/phonecodeconfirmation/',{code:code,code_id:code_id,id:id})
     .then((res) => {
                

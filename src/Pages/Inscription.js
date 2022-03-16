@@ -81,9 +81,9 @@ function Inscription({getuser}) {
 
 
 
-            axios
-            .post('https://gaalguishopbackend.herokuapp.com/api/utilisateur/registration/', {
-              //.post('http://127.0.0.1:8001/api/utilisateur/registration/',{
+            axiosInstance
+          //  .post('https://gaalguishopbackend.herokuapp.com/api/utilisateur/registration/', {
+              .post('utilisateur/registration/',{
                 phone: formData.phone,
                 prenom: formData.prenom,
                 nom: formData.nom,

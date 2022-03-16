@@ -1,4 +1,4 @@
-import React,{useState,useEffect,useRef,Fragment} from 'react'
+import React,{useState,useEffect,useRef,Fragment,useCallback} from 'react'
 import {  IonButton,IonIcon, 
   IonToast,IonLoading } from '@ionic/react'
 import {Form ,Container,Row,Col,Card,} from  'react-bootstrap'
@@ -93,8 +93,8 @@ export default function AjoutProduit() {
 })
   
   useEffect(() => {
-      axios
-       .get('https://gaalguishopbackend.herokuapp.com/api/produit/category/')
+      axiosInstance
+       .get('produit/category/')
       //.get('http://127.0.0.1:8001/api/produit/category/')
       .then(res=>{
           //console.log(res.data)
@@ -104,9 +104,9 @@ export default function AjoutProduit() {
       
   }, [])
   useEffect(()=>{
-    axios
-     .get('https://gaalguishopbackend.herokuapp.com/api/produit/region/')
-      //.get('http://127.0.0.1:8001/api/produit/region/')
+    axiosInstance
+    // .get('produit/region/')
+      .get('produit/region/')
       .then(res=>{
           //console.log(res.data)
           setregion(res.data)
@@ -266,7 +266,9 @@ const handlerefunique=e=>{
     autoClose:false
   });
 
-    const handlesubmitunique=e=>{
+     
+     const handlesubmitunique=useCallback(e=>{
+
       e.preventDefault()
       //console.log(images)
       //console.log('hello')
@@ -316,18 +318,6 @@ const handlerefunique=e=>{
       })
       .then(res=>{
            //fetchdata()
-        setdataunique({
-        nom:'',
-        description:'',
-        prix:'',
-        size:'',
-        color:'',
-        qte:'',
-        category:'',
-        region:'',
-        devise:''
-        })
-  setimageunique([])
 
   history.push('/maboutique')
             notify()    
@@ -336,8 +326,9 @@ const handlerefunique=e=>{
     .catch(()=>{
        return;
     })
-    }
-    const handlesubmit=e=>{
+    },[dataunique,imageunique])
+    
+    const handlesubmit=useCallback(e=>{
       e.preventDefault()
       //console.log(images)
       //console.log('hello')
@@ -421,45 +412,7 @@ const handlerefunique=e=>{
       })
       .then(res=>{
          // fetchdata()
-           setdata({
-      nom:'',
-      description:'',
-      prix:'',
-      taille1:'',
-      couleur1:'',
-      qte1:'',
-      taille2:'',
-      couleur2:'',
-      qte2:'',
-      taille3:'',
-      couleur3:'',
-      qte3:'',
-      taille4:'',
-      couleur4:'',
-      qte4:'',
-      taille5:'',
-      couleur5:'',
-      qte5:'',
-      taille6:'',
-      couleur6:'',
-      qte6:'',
-      taille7:'',
-      couleur7:'',
-      qte7:'',
-      taille8:'',
-      couleur8:'',
-      qte8:'',
-      taille9:'',
-      couleur9:'',
-      qte9:'',
-      taille10:'',
-      couleur10:'',
-      qte10:'',
-      category:'',
-      region:'',
-      devise:'',
-   })
-     setimage([])
+      // console.log(res.data)   
      history.push('/maboutique')
             notify()    
       //console.log(res.data)
@@ -468,7 +421,7 @@ const handlerefunique=e=>{
        return;
     })
 
-  }
+  },[data,image])
 
 
     return (

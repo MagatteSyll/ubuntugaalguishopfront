@@ -58,7 +58,10 @@ function MeilleurVendeur({user,vendeur,islog,addfollower,removefollover,btnaddfo
               <SwiperSlide>
                 <Link className='nodecolink' to={`/boutique/${v.id}/${v.user.prenom+""+v.user.nom}`}>
                   <p className='pnommeilleurvendeur'>{v.user.prenom} {v.user.nom}</p> 
-             <img src={`https://gaalguishopbackend.herokuapp.com${v.logo}`} alt='' className='imgpopmobile'/>
+             <img 
+             src={`https://gaalguishopbackend.herokuapp.com${v.logo}`}
+           // src={`http://127.0.0.1:8001${v.logo}`}
+              alt='' className='imgpopmobile'/>
              </Link>
                  
                {/*<p className='pnommeilleurvendeur'>
@@ -119,7 +122,10 @@ function MeilleurVendeur({user,vendeur,islog,addfollower,removefollover,btnaddfo
       >
           {populaire.map(cat=>  
           <Fragment>
-         <img  src={`https://gaalguishopbackend.herokuapp.com${cat.image}`} alt="" 
+         <img  
+        src={`https://gaalguishopbackend.herokuapp.com${cat.image}`}
+         //src={`http://127.0.0.1:8001${cat.image}`}
+          alt="" 
           key={cat.id} className='imgpop' /> 
           <p style={{marginLeft:'5px'}}>{cat.category} </p>
           </Fragment>
@@ -143,7 +149,10 @@ function Occasions({occas}) {
                  {occas.map(oc=>
                    <IonCol size='2' key={oc.id}> 
                     <Card>
-                    <img src={`https://gaalguishopbackend.herokuapp.com${oc.thumbnail}`} alt='' className='imgvendeur'/>
+                    <img 
+                    src={`https://gaalguishopbackend.herokuapp.com${oc.thumbnail}`}
+                   // src={`http://127.0.0.1:8001${oc.thumbnail}`}
+                     alt='' className='imgvendeur'/>
                    <Link className='linkpanier' to={`detail/${oc.slug}/${oc.nom}`}> <p>
                     {oc.nom}  <IonText style={{color:'red'}}>{oc.prix}</IonText> CFA
                     </p></Link>
@@ -211,7 +220,10 @@ function CartAccueil({category}) {
                 {category.map(cat=>
                     <Fragment>
                     <p>{cat.category}</p>
-                    <img src={`https://gaalguishopbackend.herokuapp.com${cat.image}`} alt="" className='imgcategory'  />
+                    <img 
+                    src={`https://gaalguishopbackend.herokuapp.com${cat.image}`}
+                     //src={`http://127.0.0.1:8001${cat.image}`}
+                     alt="" className='imgcategory'  />
                     <p> <Link to={`/category/${cat.category}`}>Voir plus </Link> </p>  
                     </Fragment> )}
             

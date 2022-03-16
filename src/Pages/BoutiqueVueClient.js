@@ -1,5 +1,4 @@
 import React,{useState,useEffect,Fragment} from 'react'
-import axios from 'axios'
 import BoutiqueVueDesk from '../Components/Desk/BoutiqueVueDesk';
 import BoutiqueVueMobile from '../Components/Mobile/BoutiqueVueMobile';
 import {IonLoading} from '@ionic/react'
@@ -46,9 +45,9 @@ function BoutiqueVueClient(props) {
       
     
     const getproduitactif=()=>{
-      axios
-      .post('https://gaalguishopbackend.herokuapp.com/api/produit/produitactif/',{id:id})
-      //.post('http://127.0.0.1:8001/api/produit/produitactif/',{id:id})
+      axiosInstance
+     // .post('produit/produitactif/',{id:id})
+      .post('produit/produitactif/',{id:id})
       .then(res=>{
           console.log(res.data.items)
           setproduit(res.data)  
@@ -57,34 +56,22 @@ function BoutiqueVueClient(props) {
 
     }
   const getproduitvendu=()=>{
-    axios
-    .post('https://gaalguishopbackend.herokuapp.com/api/produit/produitvenduvuclient/',{id:id})
-   // .post('http://127.0.0.1:8001/api/produit/produitvenduvuclient/',{id:id})
+    axiosInstance
+    .post('produit/produitvenduvuclient/',{id:id})
     .then(res=>{
       setproduitvendu(res.data)
       setvendload(true)
     })
   }
 const getboutique=()=>{
-  axios
-   .post('https://gaalguishopbackend.herokuapp.com/api/produit/profilboutiquevuclient/',{id:id})
-  //.post('http://127.0.0.1:8001/api/produit/profilboutiquevuclient/',{id:id})
+  axiosInstance
+   .post('produit/profilboutiquevuclient/',{id:id})
   .then(res=>{
     setprofil(res.data)
     setprofiload(true)
   })
 }
 
-      const handlecart=id=>{
-        axiosInstance
-        .post("produit/addcart/",{id})
-         .then(res=>{
-          //console.log(res.data)
-          handlebadge()
-         
-         
-      })
-      }
   
    const handleproduitactif=()=>{
     //console.log('actif')
@@ -114,12 +101,12 @@ history.push(`/reactivationboutique/${id}/${profil.user.prenom+""+profil.user.no
           <BoutiqueVueDesk profil={profil} seg={seg} handleproduitactif={handleproduitactif}
            handlevendu={handlevendu}  prodactif={prodactif} produit={produit} 
            prodvendu={vendu} produitvendu={produitvendu} isStaf={isStaf}
-             islog={islog} handlecart={handlecart} user={user} handlavertir={handlavertir}
+             islog={islog}  user={user} handlavertir={handlavertir}
              handlactivation={handlactivation} />
           <BoutiqueVueMobile profil={profil} seg={seg} handleproduitactif={handleproduitactif}
            handlevendu={handlevendu} isStaf={isStaf} handlavertir={handlavertir}
             prodactif={prodactif} produit={produit} prodvendu={vendu} produitvendu={produitvendu}
-        islog={islog}   handlecart={handlecart} handlactivation={handlactivation}
+        islog={islog}    handlactivation={handlactivation}
         user={user}  /></Fragment>}
        </div>:<IonLoading
         cssClass='my-custom-class'

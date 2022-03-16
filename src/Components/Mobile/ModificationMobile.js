@@ -84,7 +84,7 @@ function ModificationMobile({imgref,handledata,handleundata,produit,handlecat,
              </div>}
            <div className='mt-3 container'>
          <IonRow>
-          <IonCol size='5' className='lab'>
+          <IonCol size='12' className='lab'>
                <select
               onChange={handlecat}
               className="w3-select"
@@ -94,8 +94,8 @@ function ModificationMobile({imgref,handledata,handleundata,produit,handlecat,
                  <option value={c.id} key={c.id}>{c.category}</option>
                  )}
              </select>
-             </IonCol>
-             <IonCol size='5' className='lab'>
+             </IonCol><br/>
+             <IonCol size='12' className='lab'>
              <select
               onChange={handleregion}
               className="w3-select"
@@ -106,7 +106,7 @@ function ModificationMobile({imgref,handledata,handleundata,produit,handlecat,
                  <option value={r.id} key={r.id}>{r.region}</option>
                  )}
              </select>
-               </IonCol><br/><br/>
+               </IonCol><br/>
                </IonRow>
                </div>
           

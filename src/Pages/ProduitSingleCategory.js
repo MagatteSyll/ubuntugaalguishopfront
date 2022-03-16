@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import axios from 'axios'
+import axiosInstance from '../axios'
 import { IonLoading } from '@ionic/react';
 import {useHistory} from 'react-router-dom'
 import ProduitUneCategorieDesk from '../Components/Desk/ProduitUneCategorieDesk';
@@ -31,8 +31,8 @@ function ProduitSingleCategory(props) {
     
 
     const fetchdata=()=>{
-        axios
-        .post('https://gaalguishopbackend.herokuapp.com/api/produit/produitpercategory/',{category:category})
+        axiosInstance
+        .post('produit/produitpercategory/',{category:category})
         .then(res=>{
            // console.log(res.data)
             setproduit(res.data)

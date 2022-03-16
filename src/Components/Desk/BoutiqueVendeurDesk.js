@@ -30,7 +30,9 @@ function BoutiqueVendeurDesk({produit,produitvendu, botique, modal,  seg,
         <IonRow>
         <IonCol size='5'>     
         <button onClick={handleclick} className='m-0 btndrop'> <Image 
-         src={`https://gaalguishopbackend.herokuapp.com${botique.logo}`} roundedCircle
+        src={`https://gaalguishopbackend.herokuapp.com${botique.logo}`} 
+         // src={`http://127.0.0.1:8001${botique.logo}`}
+         roundedCircle
          className='picprofil'/>
         <CameraAltIcon/></button><br/><br/>
         <input type='file' accept='image/*' ref={iref} className='filimg' onChange={handlefile} />
@@ -75,7 +77,10 @@ function BoutiqueVendeurDesk({produit,produitvendu, botique, modal,  seg,
   { produitvendu.length>0 ? produitvendu.map(pi=>
     <IonCol size='3' key={pi.id}>
      <div className='singleproduit'>
-      <img src={`https://gaalguishopbackend.herokuapp.com${pi.thumbnail}`} alt="" className="imgboutiquedesk"  />
+      <img 
+      src={`https://gaalguishopbackend.herokuapp.com${pi.thumbnail}`}
+      // src={`http://127.0.0.1:8001${pi.thumbnail}`}
+       alt="" className="imgboutiquedesk"  />
       <Link className='linkpanier' to={`/detail/${pi.slug}/${pi.nom}`}>
        <p className='centerbtn'> <strong >{pi.nom}</strong></p></Link>
        <p className='centerbtn'>
@@ -95,7 +100,10 @@ function BoutiqueVendeurDesk({produit,produitvendu, botique, modal,  seg,
     <IonCol size='3' key={pi.id}>
      <button className=' btndrop' onClick={()=>handlepopen(pi.id,pi.nom,pi.slug)}> 
      <IonIcon icon={ellipsisHorizontalOutline} className='zoomicon'/></button>
-    <img src={`https://gaalguishopbackend.herokuapp.com${pi.thumbnail}`} alt="" className="imgboutiquedesk"  />
+    <img
+     src={`https://gaalguishopbackend.herokuapp.com${pi.thumbnail}`}
+      // src={`http://127.0.0.1:8001${pi.thumbnail}`}
+      alt="" className="imgboutiquedesk"  />
      <Link className='linkpanier' to={`/detail/${pi.slug}/${pi.nom}`}>
     <p className='centerbtn'> <strong >{pi.nom}</strong> </p>
       </Link>

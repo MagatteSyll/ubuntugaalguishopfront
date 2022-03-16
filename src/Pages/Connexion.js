@@ -40,9 +40,9 @@ function Connexion({getuser}) {
 			return;
 		}
         else{
-		axios
-		.post('https://gaalguishopbackend.herokuapp.com/api/utilisateur/connexion/',{
-		//.post('http://127.0.0.1:8001/api/utilisateur/connexion/', {
+		axiosInstance
+		//.post('https://gaalguishopbackend.herokuapp.com/api/utilisateur/connexion/',{
+		.post('utilisateur/connexion/', {
 				phone: formData.phone,
 				password: formData.password,
 			})

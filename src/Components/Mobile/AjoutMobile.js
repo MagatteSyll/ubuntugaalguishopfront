@@ -341,11 +341,14 @@ function AvecVariation({imgref, handleImageSelect, handlesubmit,
              <IonRow>
                <IonCol size='11' className='centerbtn'>
              <label className='lab'>Nom du produit </label>
-             <input type='text'defaultValue={data.nom}   onChange={handledata} name='nom' required/>
+             <input type='text'defaultValue={data.nom} 
+             placeholder="nom du produit"  onChange={handledata} name='nom' required/>
             </IonCol>
              <IonCol size='11' className='centerbtn'>
             <label className='lab'>Prix du produit </label>
-             <input type='number' defaultValue={data.prix}   onChange={handledata} name='prix' required/>
+             <input type='number' 
+             defaultValue={data.prix}
+             placeholder="prix "   onChange={handledata} name='prix' required/>
            </IonCol>
            <IonCol size='12' className='centerbtn'>
            <select
@@ -370,7 +373,7 @@ function AvecVariation({imgref, handleImageSelect, handlesubmit,
           <div className='mt-3'>
          <IonRow>
           
-          <IonCol size='5' className='lab'>
+          <IonCol size='12' className='lab'>
                <select
               onChange={handlecat}
               className="w3-select"
@@ -380,8 +383,8 @@ function AvecVariation({imgref, handleImageSelect, handlesubmit,
                  <option value={c.id} key={c.id}>{c.category}</option>
                  )}
              </select>
-             </IonCol>
-             <IonCol size='5' className='lab'>
+             </IonCol><br/>
+             <IonCol size='12' className='lab'>
              <select
               onChange={handleregion}
               className="w3-select"
@@ -537,15 +540,19 @@ function SansVariation({imgrefunique,handleImageSelectunique,dispunique,handlere
              
              </IonRow>
      
-       <div className='mt-4 container'>
+       <div className='mt-4 '>
        <IonRow>  
         <IonCol size='11' className='centerbtn'>
              <label className='lab'>Nom du produit </label>
-             <input type='text' defaultValue={dataunique.nom}   onChange={handledataunique} name='nom' required/>
+             <input type='text' defaultValue={dataunique.nom}  
+             placeholder='nom du produit'
+              onChange={handledataunique} name='nom' required/>
             </IonCol>
              <IonCol size='11' className='centerbtn'>
             <label className='lab'>Prix du produit </label>
-             <input type='number' defaultValue={dataunique.prix}  onChange={handledataunique} name='prix' required/>
+             <input type='number' 
+             defaultValue={dataunique.prix}
+             placeholder='prix'  onChange={handledataunique} name='prix' required/>
            </IonCol>
            <IonCol size='11' className='centerbtn'>
             
@@ -558,18 +565,24 @@ function SansVariation({imgrefunique,handleImageSelectunique,dispunique,handlere
                  <option value={d.id} key={d.id}>{d.devise}</option>
                  )}
              </select>
-             </IonCol>
+             </IonCol><br/>
            <IonCol size='11' className='centerbtn'>
-            <label className='lab'>Couleur</label>
-             <input type='text' defaultValue={dataunique.color}   onChange={handledataunique} name='color' required/>
+           <p> <label className='lab'>Couleur</label></p>
+             <input type='text' defaultValue={dataunique.color} 
+               onChange={handledataunique} name='color' required
+               placeholder='couleur'/>
            </IonCol>
            <IonCol size='11' className='centerbtn'>
             <label className='lab'>Taille ou mesure </label>
-             <input defaultValue={dataunique.size}  type='text'  onChange={handledataunique} name='size' required/>
+             <input defaultValue={dataunique.size}  type='text' 
+              onChange={handledataunique} name='size'
+              placeholder='taille' required/>
            </IonCol>
            <IonCol size='11' className='centerbtn'>
             <label className='lab'>quantité en stock </label>
-             <input type='number'  defaultValue={dataunique.qte}   onChange={handledataunique} name='qte' required/>
+             <input type='number'  defaultValue={dataunique.qte} 
+               onChange={handledataunique} name='qte'
+               placeholder='quantité' required/>
            </IonCol>
             <IonCol size='10' className='centerbtn mt-4'>
              <textarea 
@@ -577,7 +590,7 @@ function SansVariation({imgrefunique,handleImageSelectunique,dispunique,handlere
             placeholder="Description du produit" required onChange={handledataunique}
             rows="3" cols="30" name='description' />
             </IonCol><br/><br/>
-            <IonCol size='5' className='lab'>
+            <IonCol size='12' className='lab'>
                <select
               onChange={handlecatunique}
               className="w3-select"
@@ -587,8 +600,8 @@ function SansVariation({imgrefunique,handleImageSelectunique,dispunique,handlere
                  <option value={c.id} key={c.id}>{c.category}</option>
                  )}
              </select>
-             </IonCol>
-             <IonCol size='5' className='lab'>
+             </IonCol><br/>
+             <IonCol size='12' className='lab'>
              <select
               onChange={handleregionunique}
               className="w3-select"
