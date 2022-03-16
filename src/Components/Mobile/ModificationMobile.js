@@ -25,7 +25,7 @@ function ModificationMobile({imgref,handledata,handleundata,produit,handlecat,
      {detail?
       <IonGrid>
         <IonRow>
-        <IonCol size='10' className='centerbtn'>
+        <IonCol size='10'>
          <h3>Detail du produit</h3>
         <p> <strong>{produit.nom}</strong></p>
          <p> {produit.description}</p>
@@ -37,7 +37,7 @@ function ModificationMobile({imgref,handledata,handleundata,produit,handlecat,
           <p> Quantité en stock <strong>{produit.qte}</strong></p>
           </span>}
         </IonCol>
-        <IonCol size='12' className='centerbtn' >
+        <IonCol size='12' className='container' >
          <form onSubmit={handledetailsubmit}>
       <IonRow>
        <IonCol size='10'>

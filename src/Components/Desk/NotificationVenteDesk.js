@@ -34,7 +34,8 @@ function NotificationVenteDesk({notification}) {
                      <p>Quantité restante de ce produit <IonText className='redstyle'>
                           {notification.commande.produitcommande.imageproduct.quantite}
                      </IonText> </p>
-                     <p>Vous pouvez modifier la quantite restante de ce  produit <Link> ici </Link> </p>
+                     <p>Vous pouvez modifier la quantite restante de ce  produit <Link 
+            to={`/modification/${notification.commande.produitcommande.imageproduct.produit.slug}/${notification.commande.produitcommande.imageproduct.produit.nom}`}> ici </Link> </p>
                      </IonCol>
                      <IonCol size='5'>
                      <img src={`https://gaalguishopbackend.herokuapp.com${notification.commande.produitcommande.imageproduct.image}`}
@@ -65,7 +66,8 @@ function NotificationVenteDesk({notification}) {
                      <p>Quantité restante de ce produit <strong>
                           {notification.commande.produitcommande.product.qte} 
                      </strong> </p>
-                     <p>Vous pouvez modifier la quantite restante de ce  produit  <Link> ici </Link> </p>
+                     <p>Vous pouvez modifier la quantite restante de ce  produit  <Link 
+                     to={`/modification/${notification.commande.produitcommande.product.slug}/${notification.commande.produitcommande.product.nom}`}> ici </Link> </p>
                      </IonCol>
                      <IonCol size='5'>
                      <img src={`https://gaalguishopbackend.herokuapp.com${notification.commande.produitcommande.product.thumbnail}`}

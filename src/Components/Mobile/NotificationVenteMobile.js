@@ -40,7 +40,8 @@ function NotificationVenteMobile({notification}) {
                      <p>Quantité restante de ce produit <IonText className='redstyle'>
                           {notification.commande.produitcommande.imageproduct.quantite} 
                      </IonText> </p>
-                     <p>Vous pouvez modifier la quantite restante de ce  produit <Link > ici </Link> </p>
+                     <p>Vous pouvez modifier la quantite restante de ce  produit <Link
+             to={`/modification/${notification.commande.produitcommande.imageproduct.produit.slug}/${notification.commande.produitcommande.imageproduct.produit.nom}`} > ici </Link> </p>
             
              </IonCol>
           </IonRow>
@@ -73,7 +74,8 @@ function NotificationVenteMobile({notification}) {
                      <p>Quantité restante de ce produit <IonText className='redstyle'>
                           {notification.commande.produitcommande.product.quantite} 
                      </IonText> </p>
-                     <p>Vous pouvez modifier la quantite restante de ce  produit <Link > ici </Link> </p>
+                     <p>Vous pouvez modifier la quantite restante de ce  produit <Link 
+             to={`/modification/${notification.commande.produitcommande.product.slug}/${notification.commande.produitcommande.product.nom}`}> ici </Link> </p>
             
              </IonCol>
           </IonRow>
