@@ -20,7 +20,7 @@ function Accueil({isstaf,user,islog}) {
        getvendeur()
     },[])
     useEffect(()=>{
-        getcategory()
+        getcategory() 
     },[])
     useEffect(()=>{
         getoccasion()

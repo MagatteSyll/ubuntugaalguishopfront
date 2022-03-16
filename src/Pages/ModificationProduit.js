@@ -86,13 +86,13 @@ const handleclick=()=>{
 
  useEffect(() => {
       axios
-      .get('http://127.0.0.1:8001/api/produit/category/')
+      .get('https://gaalguishopbackend.herokuapp.com/api/produit/category/')
       .then(res=>{
           //console.log(res.data)
           setcat(res.data)
           setcatload(true)
       })
-      
+       
   }, [])
 
   useEffect(()=>{
@@ -135,7 +135,7 @@ const handleclick=()=>{
 
     useEffect(()=>{
       axios
-        .get('http://127.0.0.1:8001/api/produit/region/')
+        .get('https://gaalguishopbackend.herokuapp.com/api/produit/region/')
         .then(res=>{
             //console.log(res.data)
             setregion(res.data)

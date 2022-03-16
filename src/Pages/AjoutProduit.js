@@ -255,28 +255,6 @@ const handlerefunique=e=>{
           return;
         }}
        
-  
-      
-    
-     
-
-    const fetchdata=()=>{
-      axiosInstance
-      .get('produit/mesproduits/')
-      .then(res=>{
-         // console.log(res.data)
-        // setproduit(res.data)     
-      })
-    }
-    useEffect(() => {
-      axiosInstance
-      .get('utilisateur/isactive/')
-      .then(res=>{
-          //console.log(res.data)
-          setactive(res.data)
-      })
-      
-  }, [])
   const notify = () => toast.success("produit bien  ajouté  ",
   {
     position:toast.POSITION.TOP_CENTER,
@@ -337,8 +315,21 @@ const handlerefunique=e=>{
         {'content-type': 'multipart/form-data'}
       })
       .then(res=>{
-           fetchdata()
-           history.push('/maboutique')
+           //fetchdata()
+        setdataunique({
+        nom:'',
+        description:'',
+        prix:'',
+        size:'',
+        color:'',
+        qte:'',
+        category:'',
+        region:'',
+        devise:''
+        })
+  setimageunique([])
+
+  history.push('/maboutique')
             notify()    
      // console.log(res.data)
     })
@@ -429,8 +420,47 @@ const handlerefunique=e=>{
         {'content-type': 'multipart/form-data'}
       })
       .then(res=>{
-          fetchdata()
-           history.push('/maboutique')
+         // fetchdata()
+           setdata({
+      nom:'',
+      description:'',
+      prix:'',
+      taille1:'',
+      couleur1:'',
+      qte1:'',
+      taille2:'',
+      couleur2:'',
+      qte2:'',
+      taille3:'',
+      couleur3:'',
+      qte3:'',
+      taille4:'',
+      couleur4:'',
+      qte4:'',
+      taille5:'',
+      couleur5:'',
+      qte5:'',
+      taille6:'',
+      couleur6:'',
+      qte6:'',
+      taille7:'',
+      couleur7:'',
+      qte7:'',
+      taille8:'',
+      couleur8:'',
+      qte8:'',
+      taille9:'',
+      couleur9:'',
+      qte9:'',
+      taille10:'',
+      couleur10:'',
+      qte10:'',
+      category:'',
+      region:'',
+      devise:'',
+   })
+     setimage([])
+     history.push('/maboutique')
             notify()    
       //console.log(res.data)
     })
@@ -445,13 +475,7 @@ const handlerefunique=e=>{
      
     <div >
        <Container >             
-           {active?
-           <div>
-             {catload?
-             <>
-             {regionload?
-             <>
-             {deviseload?
+             {catload && regionload &&deviseload?
              <>
              <AjoutDesk picload={picload} disp={disp} imgref={imgref} handleImageSelect={handleImageSelect}
              handleref={handleref} handlesubmit={handlesubmit} handledata={handledata} handlecat={handlecat}
@@ -483,27 +507,7 @@ const handlerefunique=e=>{
       onDidDismiss={() => setShowLoading(false)}
       message={'Chargement...'}
       duration={5000}
-      />} </>:<IonLoading
-      cssClass='my-custom-class'
-      isOpen={showLoading}
-      onDidDismiss={() => setShowLoading(false)}
-      message={'Chargement...'}
-      duration={5000}
-      />} </>:<IonLoading
-      cssClass='my-custom-class'
-      isOpen={showLoading}
-      onDidDismiss={() => setShowLoading(false)}
-      message={'Chargement...'}
-      duration={5000}
-      />} </div>
-         :<IonLoading
-         cssClass='my-custom-class'
-         isOpen={showLoading}
-         onDidDismiss={() => setShowLoading(false)}
-         message={'Chargement...'}
-         duration={5000}
-         />}
-
+      />}
          <IonToast
         isOpen={tost}
         onDidDismiss={() => settost(false)}
