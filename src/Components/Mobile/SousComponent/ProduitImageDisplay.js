@@ -3,6 +3,7 @@ import React,{useState} from 'react'
 import Image from 'react-bootstrap/Image'
 import {starOutline} from 'ionicons/icons'
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import {Link} from 'react-router-dom'
 
 function ProduitImageDisplay({produitimage,produit,user,islog,handlecart,handlecartunique,handlenonlog}) {
         const [image, setimage] = useState(
@@ -65,9 +66,7 @@ setimage({...image,image:image,size:size,color:color,quantite:qte,id:lid,
             <span>
             {user.is_staff?null:
            <button className='vendrebtn' onClick={()=>handlecart(image.id)}>
-           <AddShoppingCartIcon/></button> }</span>
-           :<button className='vendrebtn' onClick={handlenonlog}>
-           <AddShoppingCartIcon /></button>} 
+           <AddShoppingCartIcon/></button> }</span>:<p><Link className='linkpanier' to='/connexion'>Se connecter </Link> pour ajouter au panier</p>} 
             </span>:<span className='redstyle'>Produit inactif</span>} </p>}
         </IonCol>
     </IonRow></IonGrid></>:
@@ -104,8 +103,7 @@ setimage({...image,image:image,size:size,color:color,quantite:qte,id:lid,
   {user.is_staff?null:
  <button className='vendrebtn' onClick={handlecartunique}>
  <AddShoppingCartIcon/></button>} </span>
- :<button className='vendrebtn' onClick={handlenonlog}>
- <AddShoppingCartIcon /></button>} 
+ :<p><Link className='linkpanier' to='/connexion'>Se connecter </Link> pour ajouter au panier</p>} 
  </span>:<span className='redstyle'>Produit inactif</span>} </p>}
   </IonCol>
     </IonRow>

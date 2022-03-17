@@ -39,7 +39,7 @@ function MeilleurVendeur({user,vendeur,islog}) {
             {vendeur.map(v=>
               <SwiperSlide>
                 <Link className='nodecolink' to={`/boutique/${v.id}/${v.user.prenom+""+v.user.nom}`}>
-                  <p className='pnommeilleurvendeur'>{v.user.prenom} {v.user.nom}</p> 
+                  <p className='pnommeilleurvendeur'>{v.user.prenom}</p> 
              <img 
              src={`https://gaalguishopbackend.herokuapp.com${v.logo}`}
            //  src={`http://127.0.0.1:8001${v.logo}`}

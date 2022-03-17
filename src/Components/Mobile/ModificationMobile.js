@@ -41,14 +41,14 @@ function ModificationMobile({imgref,handledata,handleundata,produit,handlecat,
          <form onSubmit={handledetailsubmit}>
       <IonRow>
        <IonCol size='10'>
-       <label className='lab'>Nom du produit </label>
+      <p> <label className='lab'>Nom du produit </label></p>
          <input type='text'  onChange={handledata} name='nom' required />
         </IonCol>
              <IonCol size='10'>
-            <label className='lab'>Prix du produit </label>
+           <p> <label className='lab'>Prix du produit </label></p>
              <input type='number'   onChange={handledata} name='prix' required />
            </IonCol>
-           <IonCol size='10' className='centerbtn'>
+           <IonCol size='10' >
              <select
               onChange={handledevise}
               className="w3-select"
@@ -60,7 +60,7 @@ function ModificationMobile({imgref,handledata,handleundata,produit,handlecat,
              )}
              </select>
            </IonCol>
-           <IonCol size='10' className='centerbtn mt-4'>
+           <IonCol size='10' className=' mt-4'>
              <textarea 
             placeholder="Description du produit" required onChange={handledata}
             rows="3" cols="30" name='description' />
@@ -69,20 +69,20 @@ function ModificationMobile({imgref,handledata,handleundata,produit,handlecat,
              <div className='mt-3'>
                <IonRow>
                  <IonCol size='10'>
-                 <label className='lab'>Taille </label>
+                <p> <label className='lab'>Taille </label></p>
                  <input type='text'   onChange={handledata} name='taille' required/>
                  </IonCol>
                  <IonCol size='10'>
-                 <label className='lab'>Couleur </label>
+                <p> <label className='lab'>Couleur </label></p>
                  <input type='text'  onChange={handledata} name='couleur' required/>
                  </IonCol>
                  <IonCol size='10'>
-                 <label className='lab'>Quantité en stock </label>
+                <p> <label className='lab'>Quantité en stock </label></p>
                  <input type='number'   onChange={handledata} name='qte' required/>
                  </IonCol>
                </IonRow>
              </div>}
-           <div className='mt-3 container'>
+           <div className='mt-3 '>
          <IonRow>
           <IonCol size='12' className='lab'>
                <select
